@@ -1,10 +1,12 @@
 import React from 'react'
+import { Grommet, Text } from 'grommet'
+import { grommet } from 'grommet/themes'
 
 function App() {
   return (
-    <div>
-      <p>Hello, world!</p>
-    </div>
+    <Grommet theme={grommet}>
+      <Text>Hello, world!</Text>
+    </Grommet>
   )
 }
 
