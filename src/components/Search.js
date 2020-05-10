@@ -7,10 +7,10 @@ export default ({ value, suggestions, ...rest }) => (
     <TextInput
       value={value}
       type="search"
-      icon={<FormSearch />}
+      icon={<FormSearch color="brand" />}
       placeholder="Search an address worldwide..."
       suggestions={suggestions}
     />
-    <Button a11yTitle="Locate me" icon={<Waypoint />} />
+    <Button a11yTitle="Locate me" icon={<Waypoint color="brand" />} />
   </Box>
 )
