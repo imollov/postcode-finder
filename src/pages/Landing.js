@@ -10,7 +10,11 @@ export default () => {
         <Heading size="medium" color="brand">
           PostcodeFinder
         </Heading>
-        <Search width="large" pad={{ horizontal: 'xlarge' }} />
+        <Search
+          suggestions={['Example 1', 'Example 2']}
+          width="large"
+          pad={{ horizontal: 'xlarge' }}
+        />
       </Box>
     </Box>
   )

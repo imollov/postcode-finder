@@ -2,13 +2,14 @@ import React from 'react'
 import { Box, TextInput, Button } from 'grommet'
 import { FormSearch, Waypoint } from 'grommet-icons'
 
-export default (props) => (
-  <Box direction="row" {...props}>
+export default ({ value, suggestions, ...rest }) => (
+  <Box direction="row" {...rest}>
     <TextInput
+      value={value}
       type="search"
       icon={<FormSearch />}
       placeholder="Search an address worldwide..."
-      suggestions={['Example 1', 'Example 2']}
+      suggestions={suggestions}
     />
     <Button a11yTitle="Locate me" icon={<Waypoint />} />
   </Box>
