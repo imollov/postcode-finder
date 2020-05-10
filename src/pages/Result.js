@@ -14,10 +14,7 @@ export default () => {
         justify="start"
         direction={isSmall ? 'column' : 'row'}
       >
-        <Box
-          pad={{ left: 'small' }}
-          width={!isSmall ? { min: '260px' } : 'none'}
-        >
+        <Box flex={false} pad={{ left: 'small' }}>
           <Heading size="small">PostcodeFinder</Heading>
         </Box>
         <Search
