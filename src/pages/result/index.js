@@ -1,7 +1,13 @@
 import React from 'react'
 import { Box, Heading, Header, ResponsiveContext } from 'grommet'
 
-import Search from '../components/Search'
+import Search from '../../components/Search'
+import Map from './components/Map'
+
+const lat = 42.63020858821471
+const lng = 23.382821653720946
+const postalCode = '1707'
+const address = 'Mladost 4, Sofia'
 
 export default () => {
   const size = React.useContext(ResponsiveContext)
@@ -20,7 +26,7 @@ export default () => {
           </Heading>
         </Box>
         <Search
-          value="Example address"
+          value={address}
           fill="horizontal"
           width={{ max: 'large' }}
           pad={
@@ -33,6 +39,9 @@ export default () => {
           }
         />
       </Header>
+      <Box fill>
+        <Map lat={lat} lng={lng} postalCode={postalCode} />
+      </Box>
     </Box>
   )
 }
