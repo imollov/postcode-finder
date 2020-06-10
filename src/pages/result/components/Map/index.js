@@ -11,6 +11,10 @@ export default ({ lat, lng, postalCode }) => (
     bootstrapURLKeys={{ key }}
     defaultCenter={{ lat: lat + 0.0015, lng }}
     defaultZoom={16}
+    options={() => ({
+      disableDefaultUI: true,
+      draggable: false,
+    })}
   >
     <MarkerBox lat={lat} lng={lng}>
       <MarkerContent postalCode={postalCode} />
