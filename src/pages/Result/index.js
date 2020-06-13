@@ -1,6 +1,7 @@
 import React from 'react'
-import { Box, Heading, Header, ResponsiveContext } from 'grommet'
+import { Box, Header, ResponsiveContext } from 'grommet'
 
+import Logo from '../../components/Logo'
 import Search from '../../components/Search'
 import Map from './components/Map'
 
@@ -21,9 +22,7 @@ export default () => {
         direction={isSmall ? 'column' : 'row'}
       >
         <Box flex={false} pad={{ left: 'small' }}>
-          <Heading size="small" color="accent">
-            PostcodeFinder
-          </Heading>
+          <Logo size="small" color="accent" />
         </Box>
         <Search
           value={address}

@@ -1,15 +1,14 @@
 import React from 'react'
-import { Box, Heading } from 'grommet'
+import { Box } from 'grommet'
 
+import Logo from '../components/Logo'
 import Search from '../components/Search'
 
 export default () => {
   return (
     <Box fill background="brand">
       <Box flex align="center" margin={{ top: 'xlarge' }}>
-        <Heading size="medium" color="accent">
-          PostcodeFinder
-        </Heading>
+        <Logo size="medium" color="accent" />
         <Search
           suggestions={['Example 1', 'Example 2']}
           width="large"
