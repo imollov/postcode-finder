@@ -10,7 +10,7 @@ const Container = styled.div`
 `
 
 const InnerBox = styled.div`
-  background: ${(props) => props.theme.global.colors.brand};
+  background: ${(props) => props.theme.global.colors.accent};
   padding: 25px 35px;
   display: inline-flex;
   text-align: center;
@@ -25,7 +25,7 @@ const Triangle = styled.div`
   margin-top: -1px;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
-  border-top: 20px solid ${(props) => props.theme.global.colors.brand};
+  border-top: 20px solid ${(props) => props.theme.global.colors.accent};
 `
 
 const MarkerBox = ({ ...rest }) => (

@@ -3,10 +3,10 @@ import { Box, Heading, Text } from 'grommet'
 
 const MarkerContent = ({ postalCode }) => (
   <Box>
-    <Text size="small" color="accent">
+    <Text size="small" color="brand">
       Postal Code
     </Text>
-    <Heading color="accent">{postalCode}</Heading>
+    <Heading color="brand">{postalCode}</Heading>
   </Box>
 )
 

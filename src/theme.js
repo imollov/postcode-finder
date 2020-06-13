@@ -6,7 +6,7 @@ export default deepMerge(grommet, {
     colors: {
       brand: '#10375c',
       accent: '#f3c623',
-      border: '#10375c',
+      border: '#999999',
       focus: '#faf4ff',
     },
     control: {

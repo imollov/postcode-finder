@@ -16,12 +16,12 @@ export default () => {
   return (
     <Box fill>
       <Header
-        background="accent"
+        background="brand"
         justify="start"
         direction={isSmall ? 'column' : 'row'}
       >
         <Box flex={false} pad={{ left: 'small' }}>
-          <Heading size="small" color="brand">
+          <Heading size="small" color="accent">
             PostcodeFinder
           </Heading>
         </Box>

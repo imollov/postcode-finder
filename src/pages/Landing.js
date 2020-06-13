@@ -5,9 +5,9 @@ import Search from '../components/Search'
 
 export default () => {
   return (
-    <Box fill>
+    <Box fill background="brand">
       <Box flex align="center" margin={{ top: 'xlarge' }}>
-        <Heading size="medium" color="brand">
+        <Heading size="medium" color="accent">
           PostcodeFinder
         </Heading>
         <Search
