@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
-import { GlobalContext } from '../../context/GlobalState'
-
 import LocateButton from './LocateButton'
+
+import { GlobalContext } from '../../context/GlobalState'
 
 export default () => {
   const { searchByCoords } = useContext(GlobalContext)

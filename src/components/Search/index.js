@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Box } from 'grommet'
-import { GlobalContext } from '../../context/GlobalState'
 
 import AddressSearch from './AddressSearch'
 import LocationSearch from './LocationSearch'
+
+import { GlobalContext } from '../../context/GlobalState'
 
 export default (props) => {
   const history = useHistory()

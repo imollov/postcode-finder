@@ -1,8 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { GlobalContext } from '../../context/GlobalState'
-import debounce from '../../utils/debounce'
 
 import AddressInput from './AddressInput'
+import debounce from '../../utils/debounce'
+
+import { GlobalContext } from '../../context/GlobalState'
 
 const AddressSearch = () => {
   const { searchByAddress, suggestions, setResult, result } = useContext(

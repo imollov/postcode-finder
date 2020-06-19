@@ -1,11 +1,12 @@
 import React, { createContext, useReducer } from 'react'
-import AppReducer from './AppReducer'
 import axios from 'axios'
+import AppReducer from './AppReducer'
 
 const initialState = {
   suggestions: [],
   result: null,
   error: null,
+  loading: false,
 }
 
 export const GlobalContext = createContext(initialState)

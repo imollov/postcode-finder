@@ -1,11 +1,12 @@
 import React, { useEffect, useContext } from 'react'
-import { Box } from 'grommet'
 import { useParams } from 'react-router-dom'
-import { GlobalContext } from '../../context/GlobalState'
+import { Box } from 'grommet'
 
 import Layout from '../../components/Layout'
 import Header from './components/Header'
 import Map from './components/Map'
+
+import { GlobalContext } from '../../context/GlobalState'
 
 export default () => {
   const { address: addressParam } = useParams()
