@@ -1,18 +1,19 @@
 import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
 import { Grommet } from 'grommet'
 import theme from './theme'
 
-import LandingPage from './pages/Landing'
-// import ResultPage from './pages/Result'
-
 import { GlobalProvider } from './context/GlobalState'
+import PageRoutes from './pages'
 
 function App() {
   return (
     <GlobalProvider>
-      <Grommet full theme={theme}>
-        <LandingPage />
-      </Grommet>
+      <BrowserRouter>
+        <Grommet full theme={theme}>
+          <PageRoutes />
+        </Grommet>
+      </BrowserRouter>
     </GlobalProvider>
   )
 }
