@@ -10,16 +10,13 @@ export default () => {
 
   useEffect(() => {
     const locationRef = locateButtonRef.current
-
     locationRef.onPositionSuccess = (pos) =>
       // todo: set loading
       searchByCoords(pos.coords.latitude, pos.coords.longitude)
-
     locationRef.onPositionError = (err) => {
       // todo: set error
       console.log(err)
     }
-
     return () => {
       locationRef.onPositionSuccess = null
       locationRef.onPositionError = null

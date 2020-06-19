@@ -11,10 +11,9 @@ const AddressSearch = () => {
   const [searchValue, setSearchValue] = useState('')
 
   useEffect(() => {
-    if (!result || result.address !== searchValue) {
-      searchValue.length > 5 &&
-        debounce(() => searchByAddress(searchValue), 600)
-    }
+    if (result && searchValue === result.address) return
+    if (searchValue.length > 5)
+      debounce(() => searchByAddress(searchValue), 600)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue])
 
@@ -23,7 +22,6 @@ const AddressSearch = () => {
   }, [result])
 
   const onChange = ({ target: { value } }) => setSearchValue(value)
-
   const onSelect = ({ suggestion }) => setResult(suggestion)
 
   return (

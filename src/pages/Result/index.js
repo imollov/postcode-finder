@@ -12,9 +12,8 @@ export default () => {
   const { searchByAddress, result, setResult } = useContext(GlobalContext)
 
   useEffect(() => {
-    if (!result || addressParam !== result.address) {
-      searchByAddress(addressParam).then(() => setResult(addressParam))
-    }
+    if (result && addressParam === result.address) return
+    searchByAddress(addressParam).then(() => setResult(addressParam))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addressParam])
 
