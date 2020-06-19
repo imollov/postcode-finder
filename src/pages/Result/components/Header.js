@@ -4,8 +4,6 @@ import { Box, Header, ResponsiveContext } from 'grommet'
 import Logo from '../../../components/Logo'
 import Search from '../../../components/Search'
 
-const address = 'Mladost 4, Sofia'
-
 export default () => {
   const size = React.useContext(ResponsiveContext)
   const isSmall = size === 'small'
@@ -20,7 +18,6 @@ export default () => {
         <Logo size="small" color="accent" />
       </Box>
       <Search
-        value={address}
         fill="horizontal"
         width={{ max: 'large' }}
         pad={
