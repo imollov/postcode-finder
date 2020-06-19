@@ -60,6 +60,5 @@
     "husky": "^4.2.5",
     "lint-staged": "^10.2.2",
     "prettier": "^2.0.5"
-  },
-  "proxy": "https://maps.googleapis.com"
+  }
 }

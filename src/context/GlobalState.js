@@ -17,12 +17,15 @@ export const GlobalProvider = ({ children }) => {
 
   async function search(address) {
     try {
-      const result = await axios.get('maps/api/geocode/json', {
-        params: {
-          address,
-          key,
+      const result = await axios.get(
+        'https://maps.googleapis.com/maps/api/geocode/json',
+        {
+          params: {
+            address,
+            key,
+          },
         },
-      })
+      )
 
       dispatch({
         type: 'SEARCH',
