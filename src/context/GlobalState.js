@@ -15,7 +15,7 @@ const key = process.env.REACT_APP_API_KEY
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState)
 
-  async function search(address) {
+  async function searchByAddress(address) {
     try {
       const result = await axios.get(
         'https://maps.googleapis.com/maps/api/geocode/json',
@@ -28,7 +28,31 @@ export const GlobalProvider = ({ children }) => {
       )
 
       dispatch({
-        type: 'SEARCH',
+        type: 'SEARCH_BY_ADDRESS',
+        payload: result.data.results,
+      })
+    } catch (error) {
+      dispatch({
+        type: 'SEARCH_ERROR',
+        payload: 'Search service error.',
+      })
+    }
+  }
+
+  async function searchByCoords(lat, lng) {
+    try {
+      const result = await axios.get(
+        'https://maps.googleapis.com/maps/api/geocode/json',
+        {
+          params: {
+            latlng: `${lat},${lng}`,
+            key,
+          },
+        },
+      )
+
+      dispatch({
+        type: 'SEARCH_BY_COORDS',
         payload: result.data.results,
       })
     } catch (error) {
@@ -53,7 +77,8 @@ export const GlobalProvider = ({ children }) => {
         result: state.result,
         error: state.error,
         loading: state.loading,
-        search,
+        searchByAddress,
+        searchByCoords,
         setResult,
       }}
     >

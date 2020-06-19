@@ -12,7 +12,7 @@ const transform = (result) => ({
 
 export default (state, action) => {
   switch (action.type) {
-    case 'SEARCH':
+    case 'SEARCH_BY_ADDRESS':
       return {
         ...state,
         suggestions: action.payload
@@ -24,6 +24,14 @@ export default (state, action) => {
         ...state,
         result: state.suggestions.find((s) => s.address === action.payload),
         suggestions: [],
+      }
+    case 'SEARCH_BY_COORDS':
+      return {
+        ...state,
+        result: action.payload
+          .filter((s) => s.address_components.some(hasPostalCode))
+          .map(transform)
+          .find((s) => s),
       }
     case 'SEARCH_ERROR':
       return {

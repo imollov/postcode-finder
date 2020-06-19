@@ -1,16 +1,24 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Box } from 'grommet'
+import { GlobalContext } from '../../context/GlobalState'
 
-import AddressInput from './AddressInput'
-import LocateButton from './LocateButton'
+import AddressSearch from './AddressSearch'
+import LocationSearch from './LocationSearch'
 
-const Search = (props) => {
+export default (props) => {
+  const history = useHistory()
+  const { result } = useContext(GlobalContext)
+
+  useEffect(() => {
+    result && history.push(`/r/${result.address}`)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [result])
+
   return (
     <Box direction="row" {...props}>
-      <AddressInput />
-      <LocateButton />
+      <AddressSearch />
+      <LocationSearch />
     </Box>
   )
 }
-
-export default Search
