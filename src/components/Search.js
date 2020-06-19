@@ -1,21 +1,32 @@
 import React, { useState, useContext, useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
 import { Box, TextInput, Button } from 'grommet'
 import { FormSearch, Waypoint } from 'grommet-icons'
 
 import { GlobalContext } from '../context/GlobalState'
 import debounce from '../utils/debounce'
 
-export default (props) => {
+const Search = (props) => {
+  const { search, suggestions, setResult, result } = useContext(GlobalContext)
   const [searchValue, setSearchValue] = useState('')
-  const { search, suggestions, setResult } = useContext(GlobalContext)
 
   useEffect(() => {
-    searchValue.length > 5 && debounce(() => search(searchValue), 600)
+    if (!result || result.address !== searchValue) {
+      searchValue.length > 5 && debounce(() => search(searchValue), 600)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue])
 
+  useEffect(() => {
+    result && setSearchValue(result.address)
+  }, [result])
+
   const onChange = ({ target: { value } }) => setSearchValue(value)
-  const onSelect = ({ suggestion }) => setResult(suggestion)
+
+  const onSelect = ({ suggestion }) => {
+    setResult(suggestion)
+    props.history.push(`/r/${suggestion}`)
+  }
 
   return (
     <Box direction="row" {...props}>
@@ -32,3 +43,5 @@ export default (props) => {
     </Box>
   )
 }
+
+export default withRouter(Search)
