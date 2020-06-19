@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import { GlobalContext } from '../../context/GlobalState'
 
+import Layout from '../../components/Layout'
 import Header from './components/Header'
 import Map from './components/Map'
 
@@ -21,11 +22,11 @@ export default () => {
   if (!result) return null
 
   return (
-    <Box fill>
+    <Layout fill>
       <Header />
       <Box fill>
         <Map />
       </Box>
-    </Box>
+    </Layout>
   )
 }

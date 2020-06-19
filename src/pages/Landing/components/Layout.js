@@ -1,10 +1,11 @@
 import React from 'react'
 import { Box } from 'grommet'
+import Layout from '../../../components/Layout'
 
 export default (props) => {
   return (
-    <Box fill background="brand">
+    <Layout fill background="brand">
       <Box flex align="center" margin={{ top: 'xlarge' }} {...props} />
-    </Box>
+    </Layout>
   )
 }
