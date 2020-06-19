@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
-import { Box, TextInput, Button } from 'grommet'
-import { FormSearch, Waypoint } from 'grommet-icons'
+import { TextInput } from 'grommet'
+import { FormSearch } from 'grommet-icons'
 
-import { GlobalContext } from '../context/GlobalState'
-import debounce from '../utils/debounce'
+import { GlobalContext } from '../../context/GlobalState'
+import debounce from '../../utils/debounce'
 
-const Search = (props) => {
+const AddressInput = (props) => {
   const { search, suggestions, setResult, result } = useContext(GlobalContext)
   const [searchValue, setSearchValue] = useState('')
 
@@ -29,19 +29,16 @@ const Search = (props) => {
   }
 
   return (
-    <Box direction="row" {...props}>
-      <TextInput
-        value={searchValue}
-        onChange={onChange}
-        onSelect={onSelect}
-        type="search"
-        icon={<FormSearch color="accent" />}
-        placeholder="Search an address worldwide..."
-        suggestions={suggestions.map((s) => s.address)}
-      />
-      <Button a11yTitle="Locate me" icon={<Waypoint color="accent" />} />
-    </Box>
+    <TextInput
+      value={searchValue}
+      onChange={onChange}
+      onSelect={onSelect}
+      type="search"
+      icon={<FormSearch color="accent" />}
+      placeholder="Search an address worldwide..."
+      suggestions={suggestions.map((s) => s.address)}
+    />
   )
 }
 
-export default withRouter(Search)
+export default withRouter(AddressInput)
