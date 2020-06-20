@@ -17,6 +17,7 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState)
 
   async function searchByAddress(address) {
+    setLoading()
     try {
       const result = await axios.get(
         'https://maps.googleapis.com/maps/api/geocode/json',
@@ -33,10 +34,7 @@ export const GlobalProvider = ({ children }) => {
         payload: result.data.results,
       })
     } catch (error) {
-      dispatch({
-        type: 'SEARCH_ERROR',
-        payload: 'Search service error.',
-      })
+      setError('Search service error.')
     }
   }
 
@@ -57,10 +55,7 @@ export const GlobalProvider = ({ children }) => {
         payload: result.data.results,
       })
     } catch (error) {
-      dispatch({
-        type: 'SEARCH_ERROR',
-        payload: 'Search service error.',
-      })
+      setError('Search service error.')
     }
   }
 
@@ -68,6 +63,19 @@ export const GlobalProvider = ({ children }) => {
     dispatch({
       type: 'SET_RESULT',
       payload: address,
+    })
+  }
+
+  function setLoading() {
+    dispatch({
+      type: 'SET_LOADING',
+    })
+  }
+
+  function setError(message) {
+    dispatch({
+      type: 'SET_ERROR',
+      payload: message,
     })
   }
 
@@ -81,6 +89,8 @@ export const GlobalProvider = ({ children }) => {
         searchByAddress,
         searchByCoords,
         setResult,
+        setError,
+        setLoading,
       }}
     >
       {children}

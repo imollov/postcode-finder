@@ -4,18 +4,16 @@ import LocateButton from './LocateButton'
 import { GlobalContext } from '../../context/GlobalState'
 
 export default () => {
-  const { searchByCoords } = useContext(GlobalContext)
+  const { searchByCoords, setError, setLoading } = useContext(GlobalContext)
 
   const locateButtonRef = React.createRef()
 
   useEffect(() => {
     const locationRef = locateButtonRef.current
-    locationRef.onPositionSuccess = (pos) =>
-      // todo: set loading
-      searchByCoords(pos.coords.latitude, pos.coords.longitude)
-    locationRef.onPositionError = (err) => {
-      // todo: set error
-      console.log(err)
+    locationRef.onPositionSuccess = ({ coords }) =>
+      searchByCoords(coords.latitude, coords.longitude)
+    locationRef.onPositionError = ({ message }) => {
+      setError(message)
     }
     return () => {
       locationRef.onPositionSuccess = null
@@ -24,7 +22,10 @@ export default () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleClick = () => locateButtonRef.current.getLocation()
+  const handleClick = () => {
+    setLoading()
+    locateButtonRef.current.getLocation()
+  }
 
   return <LocateButton onClick={handleClick} ref={locateButtonRef} />
 }

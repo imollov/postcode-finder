@@ -15,6 +15,7 @@ export default (state, action) => {
     case 'SEARCH_BY_ADDRESS':
       return {
         ...state,
+        loading: false,
         suggestions: action.payload
           .filter((s) => s.address_components.some(hasPostalCode))
           .map(transform),
@@ -28,15 +29,22 @@ export default (state, action) => {
     case 'SEARCH_BY_COORDS':
       return {
         ...state,
+        loading: false,
         result: action.payload
           .filter((s) => s.address_components.some(hasPostalCode))
           .map(transform)
           .find((s) => s),
       }
-    case 'SEARCH_ERROR':
+    case 'SET_ERROR':
       return {
         ...state,
+        loading: false,
         error: action.payload,
+      }
+    case 'SET_LOADING':
+      return {
+        ...state,
+        loading: true,
       }
     default:
       return state
