@@ -2,7 +2,8 @@ import React from 'react'
 import { Box, Header, ResponsiveContext } from 'grommet'
 
 import Logo from '../../../components/Logo'
-import Search from '../../../components/Search'
+import AddressSearch from '../../../components/AddressSearch'
+import LocationSearch from '../../../components/LocationSearch'
 
 export default () => {
   const size = React.useContext(ResponsiveContext)
@@ -17,7 +18,8 @@ export default () => {
       <Box flex={false} pad={{ left: 'small' }}>
         <Logo size="small" color="accent" />
       </Box>
-      <Search
+      <Box
+        direction="row"
         fill="horizontal"
         width={{ max: 'large' }}
         pad={
@@ -28,7 +30,10 @@ export default () => {
               }
             : 'none'
         }
-      />
+      >
+        <AddressSearch />
+        <LocationSearch />
+      </Box>
     </Header>
   )
 }
