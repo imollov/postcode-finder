@@ -19,6 +19,10 @@ export default () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [placeId])
 
+  useEffect(() => {
+    result && (document.title = `${result.address} – PostcodeFinder`)
+  }, [result])
+
   return (
     <Layout fill background="brand">
       <Box height="4px">
