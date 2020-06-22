@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { Box, ResponsiveContext } from 'grommet'
 
-import Layout from './components/Layout'
 import Logo from '../../components/Logo'
+import Spinner from '../../components/Spinner'
 import AddressSearch from '../../components/AddressSearch'
 import LocationSearch from '../../components/LocationSearch'
 
@@ -11,19 +11,24 @@ export default () => {
   const isSmall = size === 'small'
 
   return (
-    <Layout>
-      <Logo size="medium" color="accent" />
-      <Box
-        direction="row"
-        width="large"
-        pad={{
-          horizontal: isSmall ? 'large' : 'xlarge',
-          vertical: isSmall ? 'medium' : 'xsmall',
-        }}
-      >
-        <AddressSearch />
-        <LocationSearch />
+    <Box fill background="brand">
+      <Box height="4px">
+        <Spinner />
       </Box>
-    </Layout>
+      <Box flex align="center" margin={{ top: 'xlarge' }}>
+        <Logo size="medium" color="accent" />
+        <Box
+          direction="row"
+          width="large"
+          pad={{
+            horizontal: isSmall ? 'large' : 'xlarge',
+            vertical: isSmall ? 'medium' : 'xsmall',
+          }}
+        >
+          <AddressSearch />
+          <LocationSearch />
+        </Box>
+      </Box>
+    </Box>
   )
 }
