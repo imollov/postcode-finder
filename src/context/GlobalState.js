@@ -30,7 +30,7 @@ export const GlobalProvider = ({ children }) => {
       )
 
       dispatch({
-        type: 'SEARCH_BY_ADDRESS',
+        type: 'GET_SUGGESTIONS',
         payload: result.data.results,
       })
     } catch (error) {
@@ -51,7 +51,29 @@ export const GlobalProvider = ({ children }) => {
       )
 
       dispatch({
-        type: 'SEARCH_BY_COORDS',
+        type: 'SET_FIRST_RESULT',
+        payload: result.data.results,
+      })
+    } catch (error) {
+      setError('Oops... Something went wrong :(')
+    }
+  }
+
+  async function searchById(id) {
+    setLoading()
+    try {
+      const result = await axios.get(
+        'https://maps.googleapis.com/maps/api/geocode/json',
+        {
+          params: {
+            place_id: id,
+            key,
+          },
+        },
+      )
+
+      dispatch({
+        type: 'SET_FIRST_RESULT',
         payload: result.data.results,
       })
     } catch (error) {
@@ -61,7 +83,7 @@ export const GlobalProvider = ({ children }) => {
 
   function setResult(address) {
     dispatch({
-      type: 'SET_RESULT',
+      type: 'SET_SUGGESTION_AS_RESULT',
       payload: address,
     })
   }
@@ -88,6 +110,7 @@ export const GlobalProvider = ({ children }) => {
         loading: state.loading,
         searchByAddress,
         searchByCoords,
+        searchById,
         setResult,
         setError,
         setLoading,

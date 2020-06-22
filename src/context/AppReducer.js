@@ -5,6 +5,7 @@ const getPostalCode = (result) =>
   result.address_components.find(hasPostalCode)['short_name']
 
 const transform = (result) => ({
+  id: result.place_id,
   address: result.formatted_address,
   location: result.geometry.location,
   postalCode: getPostalCode(result),
@@ -12,7 +13,7 @@ const transform = (result) => ({
 
 export default (state, action) => {
   switch (action.type) {
-    case 'SEARCH_BY_ADDRESS':
+    case 'GET_SUGGESTIONS':
       return {
         ...state,
         loading: false,
@@ -21,13 +22,13 @@ export default (state, action) => {
           .filter((s) => s.address_components.some(hasPostalCode))
           .map(transform),
       }
-    case 'SET_RESULT':
+    case 'SET_SUGGESTION_AS_RESULT':
       return {
         ...state,
         result: state.suggestions.find((s) => s.address === action.payload),
         suggestions: [],
       }
-    case 'SEARCH_BY_COORDS':
+    case 'SET_FIRST_RESULT':
       return {
         ...state,
         loading: false,
