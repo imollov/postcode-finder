@@ -6,7 +6,9 @@ const MarkerContent = ({ postalCode }) => (
     <Text size="small" color="brand">
       Postal Code
     </Text>
-    <Heading color="brand">{postalCode}</Heading>
+    <Heading level="2" color="brand">
+      {postalCode}
+    </Heading>
   </Box>
 )
 
