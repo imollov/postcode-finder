@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Box, Header, ResponsiveContext } from 'grommet'
 
 import Logo from '../../../components/Logo'
@@ -6,7 +6,7 @@ import AddressSearch from '../../../components/AddressSearch'
 import LocationSearch from '../../../components/LocationSearch'
 
 export default () => {
-  const size = React.useContext(ResponsiveContext)
+  const size = useContext(ResponsiveContext)
   const isSmall = size === 'small'
 
   return (
