@@ -15,7 +15,7 @@ const AddressInput = ({ value, onChange, suggestions, onSelect, error }) => (
       onSelect={onSelect}
       type="search"
       icon={<FormSearch color="accent" />}
-      placeholder="Search an address worldwide..."
+      placeholder="Type an address..."
       suggestions={suggestions}
     />
   </Field>
