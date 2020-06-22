@@ -16,6 +16,7 @@ export default (state, action) => {
       return {
         ...state,
         loading: false,
+        error: null,
         suggestions: action.payload
           .filter((s) => s.address_components.some(hasPostalCode))
           .map(transform),
@@ -30,6 +31,7 @@ export default (state, action) => {
       return {
         ...state,
         loading: false,
+        error: null,
         result: action.payload
           .filter((s) => s.address_components.some(hasPostalCode))
           .map(transform)

@@ -6,7 +6,7 @@ import debounce from '../../utils/debounce'
 import { GlobalContext } from '../../context/GlobalState'
 
 const AddressSearch = () => {
-  const { searchByAddress, suggestions, setResult, result } = useContext(
+  const { searchByAddress, suggestions, setResult, result, error } = useContext(
     GlobalContext,
   )
   const [searchValue, setSearchValue] = useState('')
@@ -31,6 +31,7 @@ const AddressSearch = () => {
       onChange={onChange}
       onSelect={onSelect}
       suggestions={suggestions.map((s) => s.address)}
+      error={error}
     />
   )
 }
