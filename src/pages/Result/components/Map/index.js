@@ -1,8 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import GoogleMapReact from 'google-map-react'
+import preventGoogleMapFont from '../../../../utils/preventGoogleMapFont'
 
 import MarkerBox from './MarkerBox'
 import MarkerContent from './MarkerContent'
+import GlobalStyle from './GlobalStyle'
 
 import { GlobalContext } from '../../../../context/GlobalState'
 
@@ -16,19 +18,26 @@ export default () => {
     postalCode,
   } = result
 
+  useEffect(() => {
+    preventGoogleMapFont()
+  }, [])
+
   return (
-    <GoogleMapReact
-      bootstrapURLKeys={{ key }}
-      center={{ lat: lat + 0.0015, lng }}
-      defaultZoom={16}
-      options={() => ({
-        disableDefaultUI: true,
-        draggable: false,
-      })}
-    >
-      <MarkerBox lat={lat} lng={lng}>
-        <MarkerContent postalCode={postalCode} />
-      </MarkerBox>
-    </GoogleMapReact>
+    <>
+      <GoogleMapReact
+        bootstrapURLKeys={{ key }}
+        center={{ lat: lat + 0.0015, lng }}
+        defaultZoom={16}
+        options={() => ({
+          disableDefaultUI: true,
+          draggable: false,
+        })}
+      >
+        <MarkerBox lat={lat} lng={lng}>
+          <MarkerContent postalCode={postalCode} />
+        </MarkerBox>
+      </GoogleMapReact>
+      <GlobalStyle />
+    </>
   )
 }
