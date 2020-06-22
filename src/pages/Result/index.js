@@ -5,6 +5,7 @@ import { Box } from 'grommet'
 import Layout from '../../components/Layout'
 import Header from './components/Header'
 import Map from './components/Map'
+import Spinner from '../../components/Spinner'
 
 import { GlobalContext } from '../../context/GlobalState'
 
@@ -18,14 +19,19 @@ export default () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addressParam])
 
-  if (!result) return null
-
   return (
-    <Layout fill>
-      <Header />
-      <Box fill>
-        <Map />
+    <Layout fill background="brand">
+      <Box height="4px">
+        <Spinner />
       </Box>
+      {result && (
+        <>
+          <Header />
+          <Box fill>
+            <Map />
+          </Box>
+        </>
+      )}
     </Layout>
   )
 }

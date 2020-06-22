@@ -10,11 +10,7 @@ export default () => {
   const isSmall = size === 'small'
 
   return (
-    <Header
-      background="brand"
-      justify="start"
-      direction={isSmall ? 'column' : 'row'}
-    >
+    <Header justify="start" direction={isSmall ? 'column' : 'row'}>
       <Box flex={false} pad={{ left: 'small' }}>
         <Logo size="small" color="accent" />
       </Box>
