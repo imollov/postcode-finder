@@ -34,7 +34,7 @@ export const GlobalProvider = ({ children }) => {
         payload: result.data.results,
       })
     } catch (error) {
-      setError('Search service error.')
+      setError('Oops... Something went wrong :(')
     }
   }
 
@@ -55,7 +55,7 @@ export const GlobalProvider = ({ children }) => {
         payload: result.data.results,
       })
     } catch (error) {
-      setError('Search service error.')
+      setError('Oops... Something went wrong :(')
     }
   }
 
