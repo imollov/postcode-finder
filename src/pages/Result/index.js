@@ -2,7 +2,6 @@ import React, { useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { Box, Text } from 'grommet'
 
-import Layout from '../../components/Layout'
 import Header from './components/Header'
 import Map from './components/Map'
 import Spinner from '../../components/Spinner'
@@ -24,7 +23,7 @@ export default () => {
   }, [result])
 
   return (
-    <Layout fill background="brand">
+    <Box fill background="brand">
       <Box height="4px">
         <Spinner />
       </Box>
@@ -41,6 +40,6 @@ export default () => {
           </Box>
         </>
       )}
-    </Layout>
+    </Box>
   )
 }
