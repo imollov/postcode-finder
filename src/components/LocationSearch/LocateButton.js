@@ -3,12 +3,13 @@ import { geolocated } from 'react-geolocated'
 import { Button } from 'grommet'
 import { Waypoint } from 'grommet-icons'
 
-const LocateButton = ({ onClick, isGeolocationAvailable }) => (
+const LocateButton = ({ onClick, isGeolocationAvailable, ...rest }) => (
   <Button
     onClick={onClick}
     disabled={!isGeolocationAvailable}
     a11yTitle="Locate me"
     icon={<Waypoint color="accent" />}
+    {...rest}
   />
 )
 

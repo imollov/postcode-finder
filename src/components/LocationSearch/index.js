@@ -14,7 +14,7 @@ const locationErrorMessage = (code) =>
     ? 'Location service must be allowed'
     : 'Location service error'
 
-export default () => {
+export default (props) => {
   const { searchByCoords, setError, setLoading } = useContext(GlobalContext)
 
   const locateButtonRef = React.createRef()
@@ -37,5 +37,5 @@ export default () => {
     locateButtonRef.current.getLocation()
   }
 
-  return <LocateButton onClick={handleClick} ref={locateButtonRef} />
+  return <LocateButton onClick={handleClick} ref={locateButtonRef} {...props} />
 }
