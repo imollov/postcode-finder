@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 
 import Layout from '../../components/Layout'
-import Spinner from '../../components/Spinner'
+import LoadingBar from '../../components/LoadingBar'
 import Header from './components/Header'
 import Map from './components/Map'
 
@@ -24,7 +24,7 @@ const Result = () => {
 
   return (
     <Layout>
-      <Spinner />
+      <LoadingBar />
       <Header />
       {result && <Map />}
     </Layout>

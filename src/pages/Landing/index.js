@@ -1,11 +1,11 @@
 import React from 'react'
 import Layout from '../../components/Layout'
-import Spinner from '../../components/Spinner'
+import LoadingBar from '../../components/LoadingBar'
 import Content from './components/Content'
 
 const Landing = () => (
   <Layout>
-    <Spinner />
+    <LoadingBar />
     <Content />
   </Layout>
 )
