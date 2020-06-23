@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
-import { Box, Text } from 'grommet'
+import { Box } from 'grommet'
 
 import Layout from '../../components/Layout'
 import Spinner from '../../components/Spinner'
@@ -11,7 +11,7 @@ import { GlobalContext } from '../../context/GlobalState'
 
 export default () => {
   const { placeId } = useParams()
-  const { searchById, result, error } = useContext(GlobalContext)
+  const { searchById, result } = useContext(GlobalContext)
 
   useEffect(() => {
     if (result && placeId === result.id) return
@@ -28,18 +28,11 @@ export default () => {
       <Box height="4px">
         <Spinner />
       </Box>
-      {error && !result && (
-        <Box fill align="center" pad="medium">
-          <Text color="status-critical">{error}</Text>
-        </Box>
-      )}
+      <Header />
       {result && (
-        <>
-          <Header />
-          <Box fill>
-            <Map />
-          </Box>
-        </>
+        <Box fill>
+          <Map />
+        </Box>
       )}
     </Layout>
   )
