@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react'
-import axios from 'axios'
 import AppReducer from './AppReducer'
+import * as GeoService from '../api/geocode'
 
 const initialState = {
   suggestions: [],
@@ -10,8 +10,6 @@ const initialState = {
 }
 
 export const GlobalContext = createContext(initialState)
-
-const key = process.env.REACT_APP_API_KEY
 
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState)
@@ -32,15 +30,7 @@ export const GlobalProvider = ({ children }) => {
   const searchByAddress = async (address) => {
     setLoading()
     try {
-      const result = await axios.get(
-        'https://maps.googleapis.com/maps/api/geocode/json',
-        {
-          params: {
-            address,
-            key,
-          },
-        },
-      )
+      const result = await GeoService.searchByAddress(address)
 
       dispatch({
         type: 'GET_SUGGESTIONS',
@@ -53,15 +43,7 @@ export const GlobalProvider = ({ children }) => {
 
   const searchByCoords = async (lat, lng) => {
     try {
-      const result = await axios.get(
-        'https://maps.googleapis.com/maps/api/geocode/json',
-        {
-          params: {
-            latlng: `${lat},${lng}`,
-            key,
-          },
-        },
-      )
+      const result = await GeoService.searchByCoords(lat, lng)
 
       dispatch({
         type: 'SET_FIRST_RESULT',
@@ -75,15 +57,7 @@ export const GlobalProvider = ({ children }) => {
   const searchById = async (id) => {
     setLoading()
     try {
-      const result = await axios.get(
-        'https://maps.googleapis.com/maps/api/geocode/json',
-        {
-          params: {
-            place_id: id,
-            key,
-          },
-        },
-      )
+      const result = await GeoService.searchById(id)
 
       dispatch({
         type: 'SET_FIRST_RESULT',
