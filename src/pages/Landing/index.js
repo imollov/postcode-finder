@@ -25,7 +25,7 @@ export default () => {
             vertical: isSmall ? 'medium' : 'xsmall',
           }}
         >
-          <AddressSearch />
+          <AddressSearch autoFocus />
           <LocationSearch />
         </Box>
       </Box>

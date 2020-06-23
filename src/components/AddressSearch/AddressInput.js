@@ -7,7 +7,14 @@ const Field = styled(FormField)`
   width: 100%;
 `
 
-const AddressInput = ({ value, onChange, suggestions, onSelect, error }) => (
+const AddressInput = ({
+  value,
+  onChange,
+  suggestions,
+  onSelect,
+  error,
+  ...rest
+}) => (
   <Field error={error}>
     <TextInput
       value={value}
@@ -17,6 +24,7 @@ const AddressInput = ({ value, onChange, suggestions, onSelect, error }) => (
       icon={<FormSearch color="accent" />}
       placeholder="Type an address..."
       suggestions={suggestions}
+      {...rest}
     />
   </Field>
 )
