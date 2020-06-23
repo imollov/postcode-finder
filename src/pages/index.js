@@ -1,11 +1,12 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, lazy, Suspense } from 'react'
 import { useHistory, Redirect } from 'react-router-dom'
 import { Switch, Route } from 'react-router-dom'
-
-import LandingPage from './Landing'
-import ResultPage from './Result'
+import Splash from '../components/Splash'
 
 import { GlobalContext } from '../context/GlobalState'
+
+const LandingPage = lazy(() => import('./Landing'))
+const ResultPage = lazy(() => import('./Result'))
 
 export default () => {
   const history = useHistory()
@@ -17,10 +18,16 @@ export default () => {
   }, [result])
 
   return (
-    <Switch>
-      <Route path="/" exact component={LandingPage} />
-      <Redirect from="/r/" to="/" exact />
-      <Route path="/r/:placeId" component={ResultPage} />
-    </Switch>
+    <Suspense fallback={<Splash />}>
+      <Switch>
+        <Route path="/" exact>
+          <LandingPage />
+        </Route>
+        <Redirect from="/r/" to="/" exact />
+        <Route path="/r/:placeId">
+          <ResultPage />
+        </Route>
+      </Switch>
+    </Suspense>
   )
 }
