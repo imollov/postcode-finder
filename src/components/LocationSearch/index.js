@@ -20,15 +20,11 @@ const LocationSearch = (props) => {
   const locateButtonRef = React.createRef()
 
   useEffect(() => {
-    const locationRef = locateButtonRef.current
-    locationRef.onPositionSuccess = ({ coords }) =>
+    locateButtonRef.current.onPositionSuccess = ({ coords }) =>
       searchByCoords(coords.latitude, coords.longitude)
-    locationRef.onPositionError = ({ code }) =>
+
+    locateButtonRef.current.onPositionError = ({ code }) =>
       setError(locationErrorMessage(code))
-    return () => {
-      locationRef.onPositionSuccess = null
-      locationRef.onPositionError = null
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
