@@ -1,34 +1,17 @@
-import React, { useContext } from 'react'
-import { Box, ResponsiveContext } from 'grommet'
+import React from 'react'
+import { Box } from 'grommet'
 
-import Logo from '../../components/Logo'
+import Layout from '../../components/Layout'
 import Spinner from '../../components/Spinner'
-import AddressSearch from '../../components/AddressSearch'
-import LocationSearch from '../../components/LocationSearch'
+import Content from './components/Content'
 
 export default () => {
-  const size = useContext(ResponsiveContext)
-  const isSmall = size === 'small'
-
   return (
-    <Box fill background="brand">
+    <Layout>
       <Box height="4px">
         <Spinner />
       </Box>
-      <Box flex align="center" margin={{ top: 'xlarge' }}>
-        <Logo size="medium" color="accent" />
-        <Box
-          direction="row"
-          width="large"
-          pad={{
-            horizontal: isSmall ? 'large' : 'xlarge',
-            vertical: isSmall ? 'medium' : 'xsmall',
-          }}
-        >
-          <AddressSearch autoFocus />
-          <LocationSearch />
-        </Box>
-      </Box>
-    </Box>
+      <Content />
+    </Layout>
   )
 }
