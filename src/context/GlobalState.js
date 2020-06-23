@@ -16,7 +16,20 @@ const key = process.env.REACT_APP_API_KEY
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState)
 
-  async function searchByAddress(address) {
+  const setLoading = () => {
+    dispatch({
+      type: 'SET_LOADING',
+    })
+  }
+
+  const setError = (message) => {
+    dispatch({
+      type: 'SET_ERROR',
+      payload: message,
+    })
+  }
+
+  const searchByAddress = async (address) => {
     setLoading()
     try {
       const result = await axios.get(
@@ -38,7 +51,7 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
-  async function searchByCoords(lat, lng) {
+  const searchByCoords = async (lat, lng) => {
     try {
       const result = await axios.get(
         'https://maps.googleapis.com/maps/api/geocode/json',
@@ -59,7 +72,7 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
-  async function searchById(id) {
+  const searchById = async (id) => {
     setLoading()
     try {
       const result = await axios.get(
@@ -81,23 +94,10 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
-  function setResult(address) {
+  const setResult = (address) => {
     dispatch({
       type: 'SET_SUGGESTION_AS_RESULT',
       payload: address,
-    })
-  }
-
-  function setLoading() {
-    dispatch({
-      type: 'SET_LOADING',
-    })
-  }
-
-  function setError(message) {
-    dispatch({
-      type: 'SET_ERROR',
-      payload: message,
     })
   }
 

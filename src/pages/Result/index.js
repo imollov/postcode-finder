@@ -8,7 +8,7 @@ import Map from './components/Map'
 
 import { GlobalContext } from '../../context/GlobalState'
 
-export default () => {
+const Result = () => {
   const { placeId } = useParams()
   const { searchById, result } = useContext(GlobalContext)
 
@@ -30,3 +30,5 @@ export default () => {
     </Layout>
   )
 }
+
+export default Result

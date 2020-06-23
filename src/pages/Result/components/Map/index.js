@@ -12,7 +12,7 @@ import { GlobalContext } from '../../../../context/GlobalState'
 
 const key = process.env.REACT_APP_API_KEY
 
-export default (props) => {
+const Map = (props) => {
   const { result } = useContext(GlobalContext)
 
   const {
@@ -43,3 +43,5 @@ export default (props) => {
     </Box>
   )
 }
+
+export default Map

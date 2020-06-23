@@ -1,8 +1,8 @@
-function preventGoogleMapFont() {
+const preventGoogleMapFont = () => {
   const head = document.getElementsByTagName('head')[0]
   const insertBefore = head.insertBefore
 
-  head.insertBefore = function (newElement, referenceElement) {
+  head.insertBefore = (newElement, referenceElement) => {
     if (
       newElement.href &&
       newElement.href.indexOf(

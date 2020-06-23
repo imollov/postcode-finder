@@ -5,7 +5,7 @@ import Logo from '../../../components/Logo'
 import AddressSearch from '../../../components/AddressSearch'
 import LocationSearch from '../../../components/LocationSearch'
 
-export default () => {
+const Content = () => {
   const size = useContext(ResponsiveContext)
   const isSmall = size === 'small'
 
@@ -26,3 +26,5 @@ export default () => {
     </Box>
   )
 }
+
+export default Content

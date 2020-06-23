@@ -1,7 +1,7 @@
 import { deepMerge } from 'grommet/utils'
 import { grommet } from 'grommet/themes'
 
-export default deepMerge(grommet, {
+const theme = deepMerge(grommet, {
   global: {
     colors: {
       brand: '#10375c',
@@ -21,3 +21,5 @@ export default deepMerge(grommet, {
     },
   },
 })
+
+export default theme

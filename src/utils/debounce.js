@@ -1,8 +1,10 @@
 let timeout
 
-export default (func, delay) => {
+const debounce = (func, delay) => {
   clearTimeout(timeout)
   timeout = setTimeout(() => {
     func()
   }, delay)
 }
+
+export default debounce

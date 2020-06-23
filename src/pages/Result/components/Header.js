@@ -1,16 +1,16 @@
 import React, { useContext } from 'react'
-import { Box, Header, ResponsiveContext } from 'grommet'
+import { Box, Header as HeaderBox, ResponsiveContext } from 'grommet'
 
 import Logo from '../../../components/Logo'
 import AddressSearch from '../../../components/AddressSearch'
 import LocationSearch from '../../../components/LocationSearch'
 
-export default () => {
+const Header = () => {
   const size = useContext(ResponsiveContext)
   const isSmall = size === 'small'
 
   return (
-    <Header justify="start" direction={isSmall ? 'column' : 'row'}>
+    <HeaderBox justify="start" direction={isSmall ? 'column' : 'row'}>
       <Box flex={false} pad={{ left: 'small' }}>
         <Logo size="small" color="accent" />
       </Box>
@@ -30,6 +30,8 @@ export default () => {
         <AddressSearch />
         <LocationSearch />
       </Box>
-    </Header>
+    </HeaderBox>
   )
 }
+
+export default Header

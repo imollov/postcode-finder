@@ -6,7 +6,7 @@ const LogoHeading = styled(Heading)`
   cursor: default;
 `
 
-export default (props) => (
+const Logo = (props) => (
   <LogoHeading {...props}>
     <span role="img" aria-label="Post office">
       🏤
@@ -14,3 +14,5 @@ export default (props) => (
     {' PostcodeFinder'}
   </LogoHeading>
 )
+
+export default Logo

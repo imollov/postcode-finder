@@ -1,9 +1,11 @@
 import React from 'react'
 
-export default () => (
+const Splash = () => (
   <div className="loading">
     <span role="img" aria-label="Postal office emoji">
       🏤
     </span>
   </div>
 )
+
+export default Splash

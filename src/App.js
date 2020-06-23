@@ -4,14 +4,12 @@ import { GlobalProvider } from './context/GlobalState'
 
 import PageRoutes from './pages'
 
-function App() {
-  return (
-    <GlobalProvider>
-      <BrowserRouter>
-        <PageRoutes />
-      </BrowserRouter>
-    </GlobalProvider>
-  )
-}
+const App = () => (
+  <GlobalProvider>
+    <BrowserRouter>
+      <PageRoutes />
+    </BrowserRouter>
+  </GlobalProvider>
+)
 
 export default App
