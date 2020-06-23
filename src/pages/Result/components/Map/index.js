@@ -1,16 +1,18 @@
 import React, { useContext, useEffect } from 'react'
 import GoogleMapReact from 'google-map-react'
-import preventGoogleMapFont from '../../../../utils/preventGoogleMapFont'
+import { Box } from 'grommet'
 
 import MarkerBox from './MarkerBox'
 import MarkerContent from './MarkerContent'
 import GlobalStyle from './GlobalStyle'
 
+import preventGoogleMapFont from '../../../../utils/preventGoogleMapFont'
+
 import { GlobalContext } from '../../../../context/GlobalState'
 
 const key = process.env.REACT_APP_API_KEY
 
-export default () => {
+export default (props) => {
   const { result } = useContext(GlobalContext)
 
   const {
@@ -23,7 +25,7 @@ export default () => {
   }, [])
 
   return (
-    <>
+    <Box fill {...props}>
       <GoogleMapReact
         bootstrapURLKeys={{ key }}
         center={{ lat: lat + 0.0015, lng }}
@@ -38,6 +40,6 @@ export default () => {
         </MarkerBox>
       </GoogleMapReact>
       <GlobalStyle />
-    </>
+    </Box>
   )
 }

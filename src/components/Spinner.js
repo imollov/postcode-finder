@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import BarLoader from 'react-spinners/BarLoader'
+import { Box } from 'grommet'
 
 import { ThemeContext } from 'styled-components'
 import { GlobalContext } from '../context/GlobalState'
@@ -14,13 +15,9 @@ const Spinner = (props) => {
   const { loading } = useContext(GlobalContext)
 
   return (
-    <BarLoader
-      loading={loading}
-      color={accent}
-      height="4px"
-      width="100%"
-      {...props}
-    />
+    <Box height="4px" {...props}>
+      <BarLoader loading={loading} color={accent} width="100%" />
+    </Box>
   )
 }
 
