@@ -1,11 +1,11 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Box } from 'grommet'
 import Spinner from './Spinner'
 
-import { GlobalContext } from '../../context/GlobalState'
+import { useGlobalLoadingContext } from '../../context/GlobalState'
 
 const LoadingBar = (props) => {
-  const { loading } = useContext(GlobalContext)
+  const loading = useGlobalLoadingContext()
 
   return (
     <Box height="4px" {...props}>

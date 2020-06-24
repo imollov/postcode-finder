@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react'
+import React, { createContext, useReducer, useContext, useMemo } from 'react'
 import AppReducer from './AppReducer'
 import * as GeoService from '../api/geocode'
 
@@ -9,7 +9,44 @@ const initialState = {
   loading: false,
 }
 
-export const GlobalContext = createContext(initialState)
+const GlobalActionsContext = createContext()
+const GlobalResultContext = createContext(initialState.result)
+const GlobalSuggestionsContext = createContext(initialState.suggestions)
+const GlobalLoadingContext = createContext(initialState.loading)
+const GlobalErrorContext = createContext(initialState.error)
+
+const factoryUseContext = (name, context) => {
+  return () => {
+    const ctx = useContext(context)
+    if (ctx === undefined) {
+      throw new Error(
+        `use${name}Context must be used withing a ${name}ContextProvider.`,
+      )
+    }
+    return ctx
+  }
+}
+
+export const useGlobalActionsContext = factoryUseContext(
+  'GlobalActionsContext',
+  GlobalActionsContext,
+)
+export const useGlobalResultContext = factoryUseContext(
+  'GlobalResultContext',
+  GlobalResultContext,
+)
+export const useGlobalSuggestionsContext = factoryUseContext(
+  'GlobalSuggestionsContext',
+  GlobalSuggestionsContext,
+)
+export const useGlobalLoadingContext = factoryUseContext(
+  'GlobalLoadingContext',
+  GlobalLoadingContext,
+)
+export const useGlobalErrorContext = factoryUseContext(
+  'GlobalErrorContext',
+  GlobalErrorContext,
+)
 
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState)
@@ -75,22 +112,30 @@ export const GlobalProvider = ({ children }) => {
     })
   }
 
+  const actions = useMemo(
+    () => ({
+      setLoading,
+      setError,
+      searchByAddress,
+      searchByCoords,
+      searchById,
+      setResult,
+    }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  )
+
   return (
-    <GlobalContext.Provider
-      value={{
-        suggestions: state.suggestions,
-        result: state.result,
-        error: state.error,
-        loading: state.loading,
-        searchByAddress,
-        searchByCoords,
-        searchById,
-        setResult,
-        setError,
-        setLoading,
-      }}
-    >
-      {children}
-    </GlobalContext.Provider>
+    <GlobalActionsContext.Provider value={actions}>
+      <GlobalResultContext.Provider value={state.result}>
+        <GlobalSuggestionsContext.Provider value={state.suggestions}>
+          <GlobalLoadingContext.Provider value={state.loading}>
+            <GlobalErrorContext.Provider value={state.error}>
+              {children}
+            </GlobalErrorContext.Provider>
+          </GlobalLoadingContext.Provider>
+        </GlobalSuggestionsContext.Provider>
+      </GlobalResultContext.Provider>
+    </GlobalActionsContext.Provider>
   )
 }

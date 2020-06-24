@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import GoogleMapReact from 'google-map-react'
 import { Box } from 'grommet'
 
@@ -8,21 +8,23 @@ import GlobalStyle from './GlobalStyle'
 
 import preventGoogleMapFont from '../../../../utils/preventGoogleMapFont'
 
-import { GlobalContext } from '../../../../context/GlobalState'
+import { useGlobalResultContext } from '../../../../context/GlobalState'
 
 const key = process.env.REACT_APP_API_KEY
 
 const Map = (props) => {
-  const { result } = useContext(GlobalContext)
+  const result = useGlobalResultContext()
+
+  useEffect(() => {
+    preventGoogleMapFont()
+  }, [])
+
+  if (!result) return null
 
   const {
     location: { lat, lng },
     postalCode,
   } = result
-
-  useEffect(() => {
-    preventGoogleMapFont()
-  }, [])
 
   return (
     <Box fill {...props}>

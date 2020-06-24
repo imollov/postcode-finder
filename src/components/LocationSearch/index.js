@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import LocateButton from './LocateButton'
 
-import { GlobalContext } from '../../context/GlobalState'
+import { useGlobalActionsContext } from '../../context/GlobalState'
 
 const PositionErrorCodes = {
   1: 'PERMISSION_DENIED',
@@ -15,7 +15,7 @@ const locationErrorMessage = (code) =>
     : 'Location service error'
 
 const LocationSearch = (props) => {
-  const { searchByCoords, setError, setLoading } = useContext(GlobalContext)
+  const { searchByCoords, setError, setLoading } = useGlobalActionsContext()
 
   const locateButtonRef = React.createRef()
 

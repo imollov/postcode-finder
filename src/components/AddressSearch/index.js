@@ -1,14 +1,25 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
 
 import AddressInput from './AddressInput'
 import debounce from '../../utils/debounce'
 
-import { GlobalContext } from '../../context/GlobalState'
+import {
+  useGlobalActionsContext,
+  useGlobalResultContext,
+  useGlobalSuggestionsContext,
+  useGlobalErrorContext,
+} from '../../context/GlobalState'
 
 const AddressSearch = (props) => {
-  const { searchByAddress, suggestions, setResult, result, error } = useContext(
-    GlobalContext,
-  )
+  const history = useHistory()
+  const { placeId } = useParams()
+
+  const { searchByAddress, searchById, setResult } = useGlobalActionsContext()
+  const result = useGlobalResultContext()
+  const suggestions = useGlobalSuggestionsContext()
+  const error = useGlobalErrorContext()
+
   const [searchValue, setSearchValue] = useState('')
 
   useEffect(() => {
@@ -19,8 +30,19 @@ const AddressSearch = (props) => {
   }, [searchValue])
 
   useEffect(() => {
-    result && setSearchValue(result.address)
+    if (result) {
+      setSearchValue(result.address)
+      document.title = `${result.address} – PostcodeFinder`
+      history.push(`/r/${result.id}`)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [result])
+
+  useEffect(() => {
+    if (result && placeId === result.id) return
+    placeId && searchById(placeId)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [placeId])
 
   const onChange = ({ target: { value } }) => setSearchValue(value)
   const onSelect = ({ suggestion }) => setResult(suggestion)
