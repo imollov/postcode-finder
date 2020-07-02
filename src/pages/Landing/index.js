@@ -11,8 +11,7 @@ const Landing = () => {
 
   useEffect(() => {
     result && history.push(`/r/${result.id}`)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [result])
+  }, [result, history])
 
   return <Page />
 }

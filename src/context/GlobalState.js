@@ -1,4 +1,10 @@
-import React, { createContext, useReducer, useContext, useMemo } from 'react'
+import React, {
+  createContext,
+  useReducer,
+  useContext,
+  useMemo,
+  useCallback,
+} from 'react'
 import AppReducer from './AppReducer'
 import * as GeoService from '../api/geocode'
 
@@ -51,66 +57,81 @@ export const useGlobalErrorContext = factoryUseContext(
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState)
 
-  const setLoading = () => {
+  const setLoading = useCallback(() => {
     dispatch({
       type: 'SET_LOADING',
     })
-  }
+  }, [dispatch])
 
-  const setError = (message) => {
-    dispatch({
-      type: 'SET_ERROR',
-      payload: message,
-    })
-  }
-
-  const searchByAddress = async (address) => {
-    setLoading()
-    try {
-      const result = await GeoService.searchByAddress(address)
-
+  const setError = useCallback(
+    (message) => {
       dispatch({
-        type: 'GET_SUGGESTIONS',
-        payload: result.data.results,
+        type: 'SET_ERROR',
+        payload: message,
       })
-    } catch (error) {
-      setError('Oops... Something went wrong :(')
-    }
-  }
+    },
+    [dispatch],
+  )
 
-  const searchByCoords = async (lat, lng) => {
-    try {
-      const result = await GeoService.searchByCoords(lat, lng)
+  const searchByAddress = useCallback(
+    async (address) => {
+      setLoading()
+      try {
+        const result = await GeoService.searchByAddress(address)
 
+        dispatch({
+          type: 'GET_SUGGESTIONS',
+          payload: result.data.results,
+        })
+      } catch (error) {
+        setError('Oops... Something went wrong :(')
+      }
+    },
+    [dispatch, setError, setLoading],
+  )
+
+  const searchByCoords = useCallback(
+    async (lat, lng) => {
+      try {
+        const result = await GeoService.searchByCoords(lat, lng)
+
+        dispatch({
+          type: 'SET_FIRST_RESULT',
+          payload: result.data.results,
+        })
+      } catch (error) {
+        setError('Oops... Something went wrong :(')
+      }
+    },
+    [dispatch, setError],
+  )
+
+  const searchById = useCallback(
+    async (id) => {
+      setLoading()
+      try {
+        const result = await GeoService.searchById(id)
+
+        dispatch({
+          type: 'SET_FIRST_RESULT',
+          payload: result.data.results,
+        })
+      } catch (error) {
+        setError('Oops... Something went wrong :(')
+      }
+    },
+    [dispatch, setLoading, setError],
+  )
+
+  const setResult = useCallback(
+    (address) => {
       dispatch({
-        type: 'SET_FIRST_RESULT',
-        payload: result.data.results,
+        type: 'SET_SUGGESTION_AS_RESULT',
+        payload: address,
       })
-    } catch (error) {
-      setError('Oops... Something went wrong :(')
-    }
-  }
-
-  const searchById = async (id) => {
-    setLoading()
-    try {
-      const result = await GeoService.searchById(id)
-
-      dispatch({
-        type: 'SET_FIRST_RESULT',
-        payload: result.data.results,
-      })
-    } catch (error) {
-      setError('Oops... Something went wrong :(')
-    }
-  }
-
-  const setResult = (address) => {
-    dispatch({
-      type: 'SET_SUGGESTION_AS_RESULT',
-      payload: address,
-    })
-  }
+    },
+    [dispatch],
+  )
 
   const actions = useMemo(
     () => ({
@@ -121,8 +142,14 @@ export const GlobalProvider = ({ children }) => {
       searchById,
       setResult,
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
+    [
+      setLoading,
+      setError,
+      searchByAddress,
+      searchByCoords,
+      searchById,
+      setResult,
+    ],
   )
 
   return (

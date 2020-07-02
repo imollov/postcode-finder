@@ -15,8 +15,7 @@ const Result = () => {
   const result = useGlobalResultContext()
 
   useEffect(() => {
-    if (result && result.id === placeId) return
-    placeId && searchById(placeId)
+    if (!result || result.id !== placeId) searchById(placeId)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [placeId])
 
@@ -28,8 +27,7 @@ const Result = () => {
         history.push(`/r/${result.id}`)
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [result])
+  }, [result, placeId, history])
 
   return <Page />
 }

@@ -25,8 +25,7 @@ const LocationSearch = (props) => {
 
     locateButtonRef.current.onPositionError = ({ code }) =>
       setError(locationErrorMessage(code))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [locateButtonRef, searchByCoords, setError])
 
   const handleClick = () => {
     setLoading()
