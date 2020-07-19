@@ -33,24 +33,24 @@ const factoryUseContext = (name, context) => {
   }
 }
 
-export const useGlobalActionsContext = factoryUseContext(
-  'GlobalActionsContext',
+export const useGlobalActions = factoryUseContext(
+  'GlobalActions',
   GlobalActionsContext,
 )
-export const useGlobalResultContext = factoryUseContext(
-  'GlobalResultContext',
+export const useGlobalResult = factoryUseContext(
+  'GlobalResult',
   GlobalResultContext,
 )
-export const useGlobalSuggestionsContext = factoryUseContext(
-  'GlobalSuggestionsContext',
+export const useGlobalSuggestions = factoryUseContext(
+  'GlobalSuggestions',
   GlobalSuggestionsContext,
 )
-export const useGlobalLoadingContext = factoryUseContext(
-  'GlobalLoadingContext',
+export const useGlobalLoading = factoryUseContext(
+  'GlobalLoading',
   GlobalLoadingContext,
 )
-export const useGlobalErrorContext = factoryUseContext(
-  'GlobalErrorContext',
+export const useGlobalError = factoryUseContext(
+  'GlobalError',
   GlobalErrorContext,
 )
 

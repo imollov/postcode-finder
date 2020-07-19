@@ -8,12 +8,12 @@ import GlobalStyle from './GlobalStyle'
 
 import preventGoogleMapFont from '../../../../utils/preventGoogleMapFont'
 
-import { useGlobalResultContext } from '../../../../context/GlobalState'
+import { useGlobalResult } from '../../../../context/GlobalState'
 
 const key = process.env.REACT_APP_API_KEY
 
 const Map = (props) => {
-  const result = useGlobalResultContext()
+  const result = useGlobalResult()
 
   useEffect(() => {
     preventGoogleMapFont()

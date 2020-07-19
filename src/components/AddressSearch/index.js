@@ -4,17 +4,17 @@ import AddressInput from './AddressInput'
 import debounce from '../../utils/debounce'
 
 import {
-  useGlobalActionsContext,
-  useGlobalResultContext,
-  useGlobalSuggestionsContext,
-  useGlobalErrorContext,
+  useGlobalActions,
+  useGlobalResult,
+  useGlobalSuggestions,
+  useGlobalError,
 } from '../../context/GlobalState'
 
 const AddressSearch = (props) => {
-  const { searchByAddress, setResult } = useGlobalActionsContext()
-  const result = useGlobalResultContext() || {}
-  const suggestions = useGlobalSuggestionsContext()
-  const error = useGlobalErrorContext()
+  const { searchByAddress, setResult } = useGlobalActions()
+  const result = useGlobalResult() || {}
+  const suggestions = useGlobalSuggestions()
+  const error = useGlobalError()
 
   const [searchValue, setSearchValue] = useState('')
 

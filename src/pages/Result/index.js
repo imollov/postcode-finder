@@ -3,16 +3,13 @@ import { useHistory, useParams } from 'react-router-dom'
 
 import Page from './components/Page'
 
-import {
-  useGlobalActionsContext,
-  useGlobalResultContext,
-} from '../../context/GlobalState'
+import { useGlobalActions, useGlobalResult } from '../../context/GlobalState'
 
 const Result = () => {
   const history = useHistory()
   const { placeId } = useParams()
-  const { searchById } = useGlobalActionsContext()
-  const result = useGlobalResultContext()
+  const { searchById } = useGlobalActions()
+  const result = useGlobalResult()
 
   useEffect(() => {
     if (!result || result.id !== placeId) searchById(placeId)
