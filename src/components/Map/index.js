@@ -5,24 +5,18 @@ import { Box } from 'grommet'
 import MarkerBox from './MarkerBox'
 import MarkerContent from './MarkerContent'
 import GlobalStyle from './GlobalStyle'
-import preventGoogleMapFont from '../../../../utils/preventGoogleMapFont'
-import { useGlobalResult } from '../../../../context/GlobalState'
+import preventGoogleMapFont from '../../utils/preventGoogleMapFont'
 
 const key = process.env.REACT_APP_API_KEY
 
-const Map = (props) => {
-  const result = useGlobalResult()
+const lat = 42.6303525
+const lng = 23.3691035
+const postalCode = '1715'
 
+const Map = (props) => {
   useEffect(() => {
     preventGoogleMapFont()
   }, [])
-
-  if (!result) return null
-
-  const {
-    location: { lat, lng },
-    postalCode,
-  } = result
 
   return (
     <Box fill {...props}>

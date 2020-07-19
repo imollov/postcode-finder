@@ -1,33 +1,30 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import LocateButton from './LocateButton'
-import { useGlobalActions } from '../../context/GlobalState'
 
-const PositionErrorCodes = {
-  1: 'PERMISSION_DENIED',
-  2: 'POSITION_UNAVAILABLE',
-  3: 'TIMEOUT',
-}
+// const PositionErrorCodes = {
+//   1: 'PERMISSION_DENIED',
+//   2: 'POSITION_UNAVAILABLE',
+//   3: 'TIMEOUT',
+// }
 
-const locationErrorMessage = (code) =>
-  PositionErrorCodes[code] === 'PERMISSION_DENIED'
-    ? 'Location service must be allowed'
-    : 'Location service error'
+// const locationErrorMessage = (code) =>
+//   PositionErrorCodes[code] === 'PERMISSION_DENIED'
+//     ? 'Location service must be allowed'
+//     : 'Location service error'
 
 const LocationSearch = (props) => {
-  const { searchByCoords, setError, setLoading } = useGlobalActions()
-
   const locateButtonRef = React.createRef()
 
-  useEffect(() => {
-    locateButtonRef.current.onPositionSuccess = ({ coords }) =>
-      searchByCoords(coords.latitude, coords.longitude)
+  // useEffect(() => {
+  //   locateButtonRef.current.onPositionSuccess = ({ coords }) =>
+  //     searchByCoords(coords.latitude, coords.longitude)
 
-    locateButtonRef.current.onPositionError = ({ code }) =>
-      setError(locationErrorMessage(code))
-  }, [locateButtonRef, searchByCoords, setError])
+  //   locateButtonRef.current.onPositionError = ({ code }) =>
+  //     setError(locationErrorMessage(code))
+  // }, [locateButtonRef, searchByCoords, setError])
 
   const handleClick = () => {
-    setLoading()
+    // setLoading()
     locateButtonRef.current.getLocation()
   }
 
