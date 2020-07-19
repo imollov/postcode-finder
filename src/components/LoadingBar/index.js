@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box } from 'grommet'
-import Spinner from './Spinner'
 
+import Spinner from './Spinner'
 import { useGlobalLoading } from '../../context/GlobalState'
 
 const LoadingBar = (props) => {

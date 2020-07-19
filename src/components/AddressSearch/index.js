@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 
 import AddressInput from './AddressInput'
 import debounce from '../../utils/debounce'
-
 import {
   useGlobalActions,
   useGlobalResult,

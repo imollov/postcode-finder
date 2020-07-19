@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import LocateButton from './LocateButton'
-
 import { useGlobalActions } from '../../context/GlobalState'
 
 const PositionErrorCodes = {

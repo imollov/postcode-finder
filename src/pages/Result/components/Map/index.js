@@ -5,9 +5,7 @@ import { Box } from 'grommet'
 import MarkerBox from './MarkerBox'
 import MarkerContent from './MarkerContent'
 import GlobalStyle from './GlobalStyle'
-
 import preventGoogleMapFont from '../../../../utils/preventGoogleMapFont'
-
 import { useGlobalResult } from '../../../../context/GlobalState'
 
 const key = process.env.REACT_APP_API_KEY

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 
 import Page from './components/Page'
-
 import { useGlobalActions, useGlobalResult } from '../../context/GlobalState'
 
 const Result = () => {

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import Page from './components/Page'
-
 import { useGlobalResult } from '../../context/GlobalState'
 
 const Landing = () => {

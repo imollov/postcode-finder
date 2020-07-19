@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Switch, Route } from 'react-router-dom'
+
 import Splash from '../components/Splash'
 
 const LandingPage = lazy(() => import('./Landing'))
