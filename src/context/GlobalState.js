@@ -80,7 +80,7 @@ export const GlobalProvider = ({ children }) => {
         const result = await GeoService.searchByAddress(address)
 
         dispatch({
-          type: 'GET_SUGGESTIONS',
+          type: 'SET_SUGGESTIONS',
           payload: result,
         })
       } catch (error) {

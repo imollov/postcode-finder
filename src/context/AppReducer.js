@@ -1,6 +1,6 @@
 export default (state, action) => {
   switch (action.type) {
-    case 'GET_SUGGESTIONS':
+    case 'SET_SUGGESTIONS':
       return {
         ...state,
         loading: false,
