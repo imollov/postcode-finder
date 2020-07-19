@@ -81,7 +81,7 @@ export const GlobalProvider = ({ children }) => {
 
         dispatch({
           type: 'GET_SUGGESTIONS',
-          payload: result.data.results,
+          payload: result,
         })
       } catch (error) {
         setError('Oops... Something went wrong :(')
@@ -97,7 +97,7 @@ export const GlobalProvider = ({ children }) => {
 
         dispatch({
           type: 'SET_FIRST_RESULT',
-          payload: result.data.results,
+          payload: result,
         })
       } catch (error) {
         setError('Oops... Something went wrong :(')
@@ -114,7 +114,7 @@ export const GlobalProvider = ({ children }) => {
 
         dispatch({
           type: 'SET_FIRST_RESULT',
-          payload: result.data.results,
+          payload: result,
         })
       } catch (error) {
         setError('Oops... Something went wrong :(')

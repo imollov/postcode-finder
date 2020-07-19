@@ -1,16 +1,3 @@
-const hasPostalCode = (addressComponent) =>
-  addressComponent.types.includes('postal_code')
-
-const getPostalCode = (result) =>
-  result.address_components.find(hasPostalCode)['short_name']
-
-const transform = (result) => ({
-  id: result.place_id,
-  address: result.formatted_address,
-  location: result.geometry.location,
-  postalCode: getPostalCode(result),
-})
-
 export default (state, action) => {
   switch (action.type) {
     case 'GET_SUGGESTIONS':
@@ -18,9 +5,7 @@ export default (state, action) => {
         ...state,
         loading: false,
         error: null,
-        suggestions: action.payload
-          .filter((s) => s.address_components.some(hasPostalCode))
-          .map(transform),
+        suggestions: action.payload,
       }
     case 'SET_SUGGESTION_AS_RESULT':
       return {
@@ -33,10 +18,7 @@ export default (state, action) => {
         ...state,
         loading: false,
         error: null,
-        result: action.payload
-          .filter((s) => s.address_components.some(hasPostalCode))
-          .map(transform)
-          .find((s) => s),
+        result: action.payload.find((s) => s),
       }
     case 'SET_ERROR':
       return {
