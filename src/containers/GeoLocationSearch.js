@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { geolocated } from 'react-geolocated'
+
 import LocateButton from '../components/LocateButton'
+import geoLocationErrorMessage from '../utils/geoLocationErrorMessage'
 import { getPlacesAndSelectFirst, setLoading, setError } from '../actions'
 
 const GeoLocatedButton = geolocated({
@@ -10,17 +12,6 @@ const GeoLocatedButton = geolocated({
   },
   suppressLocationOnMount: true,
 })(LocateButton)
-
-const PositionErrorCodes = {
-  1: 'PERMISSION_DENIED',
-  2: 'POSITION_UNAVAILABLE',
-  3: 'TIMEOUT',
-}
-
-const locationErrorMessage = (code) =>
-  PositionErrorCodes[code] === 'PERMISSION_DENIED'
-    ? 'Location service must be allowed'
-    : 'Location service error'
 
 const GeoLocationSearch = (props) => {
   const dispatch = useDispatch()
@@ -33,7 +24,7 @@ const GeoLocationSearch = (props) => {
       dispatch(getPlacesAndSelectFirst({ latlng: `${latitude},${longitude}` }))
 
     geoLocatedButtonRef.current.onPositionError = ({ code }) =>
-      dispatch(setError(locationErrorMessage(code)))
+      dispatch(setError(geoLocationErrorMessage(code)))
   }, [geoLocatedButtonRef, dispatch])
 
   const handleClick = () => {
