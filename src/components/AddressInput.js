@@ -3,10 +3,6 @@ import styled from 'styled-components'
 import { FormField, TextInput } from 'grommet'
 import { FormSearch } from 'grommet-icons'
 
-const Field = styled(FormField)`
-  width: 100%;
-`
-
 const AddressInput = ({
   address,
   suggestions,
@@ -27,14 +23,12 @@ const AddressInput = ({
     onChange(value)
   }
 
-  const handleSelect = (arg) => onSelect(arg.suggestion)
-
   return (
     <Field error={error}>
       <TextInput
         value={value || ''}
         onChange={handleChange}
-        onSelect={handleSelect}
+        onSelect={onSelect}
         suggestions={suggestions}
         type="search"
         icon={<FormSearch color="accent" />}
@@ -44,5 +38,9 @@ const AddressInput = ({
     </Field>
   )
 }
+
+const Field = styled(FormField)`
+  width: 100%;
+`
 
 export default AddressInput

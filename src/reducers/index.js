@@ -45,6 +45,9 @@ function places(state = [], action) {
     case RECEIVE_PLACES:
       return action.items
 
+    case SELECT_PLACE:
+      return []
+
     default:
       return state
   }
@@ -53,7 +56,7 @@ function places(state = [], action) {
 function selectedPlace(state = null, action) {
   switch (action.type) {
     case SELECT_PLACE:
-      return action.address
+      return action.place
 
     default:
       return state

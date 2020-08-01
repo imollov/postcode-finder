@@ -6,25 +6,26 @@ import debounce from '../utils/debounce'
 import { getPlaces, selectPlace } from '../actions'
 
 function AddressSearch(props) {
-  const selectedPlace = useSelector((s) => s.selectedPlace)
   const suggestions = useSelector((s) => s.places.map((p) => p.address))
+  const selectedAddress = useSelector(
+    (s) => s.selectedPlace && s.selectedPlace.address,
+  )
   const error = useSelector((s) => s.error)
 
   const dispatch = useDispatch()
 
-  const handleSearch = (address) =>
+  const handleInputChange = (address) =>
     address.length > 5 && debounce(() => dispatch(getPlaces({ address })), 250)
 
-  const handleSelect = (value) => {
-    dispatch(selectPlace(value))
-  }
+  const handleSuggestionSelect = ({ suggestion }) =>
+    dispatch(selectPlace(suggestion))
 
   return (
     <AddressInput
-      onChange={handleSearch}
-      onSelect={handleSelect}
+      onChange={handleInputChange}
+      onSelect={handleSuggestionSelect}
       suggestions={suggestions}
-      address={selectedPlace}
+      address={selectedAddress}
       error={error}
       {...props}
     />

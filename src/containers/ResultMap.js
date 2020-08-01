@@ -5,9 +5,7 @@ import { useSelector } from 'react-redux'
 const key = process.env.REACT_APP_API_KEY
 
 function ResultMap(props) {
-  const result = useSelector((s) =>
-    s.places.find((p) => p.address === s.selectedPlace),
-  )
+  const result = useSelector((s) => s.selectedPlace)
 
   if (!result) return null
 

@@ -20,9 +20,11 @@ export function setError(message) {
 }
 
 export function selectPlace(address) {
-  return {
-    type: SELECT_PLACE,
-    address,
+  return async (dispatch, getState) => {
+    dispatch({
+      type: SELECT_PLACE,
+      place: getState().places.find((p) => p.address === address),
+    })
   }
 }
 
