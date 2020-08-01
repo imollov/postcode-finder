@@ -7,21 +7,15 @@ import MarkerContent from './MarkerContent'
 import GlobalStyle from './GlobalStyle'
 import preventGoogleMapFont from '../../utils/preventGoogleMapFont'
 
-const key = process.env.REACT_APP_API_KEY
-
-const lat = 42.6303525
-const lng = 23.3691035
-const postalCode = '1715'
-
-const Map = (props) => {
+const Map = ({ lat, lng, postalCode, googleMapsKey, ...rest }) => {
   useEffect(() => {
     preventGoogleMapFont()
   }, [])
 
   return (
-    <Box fill {...props}>
+    <Box fill {...rest}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key }}
+        bootstrapURLKeys={{ key: googleMapsKey }}
         center={{ lat: lat + 0.0015, lng }}
         defaultZoom={16}
         options={() => ({

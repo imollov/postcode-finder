@@ -1,21 +1,22 @@
 import React, { useContext } from 'react'
+import { useSelector } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { Box, ResponsiveContext } from 'grommet'
 
-import AddressInput from '../components/AddressInput'
-import LocationSearch from '../components/LocationSearch'
 import Logo from '../components/Logo'
-import Layout from '../components/Layout'
-import Spinner from '../components/Spinner'
+import AddressSearch from './AddressSearch'
+import GeoLocationSearch from './GeoLocationSearch'
 
-const Landing = () => {
+const LandingPage = () => {
+  const redirectTo = useSelector((s) => s.redirectTo)
+
   const size = useContext(ResponsiveContext)
   const isSmall = size === 'small'
 
-  return (
-    <Layout>
-      <Box height="4px">
-        <Spinner />
-      </Box>
+  return redirectTo ? (
+    <Redirect to={redirectTo} />
+  ) : (
+    <>
       <Box flex align="center" margin={{ top: 'xlarge' }}>
         <Logo size="medium" color="accent" />
         <Box
@@ -26,12 +27,12 @@ const Landing = () => {
             vertical: isSmall ? 'medium' : 'xsmall',
           }}
         >
-          <AddressInput autoFocus />
-          <LocationSearch />
+          <AddressSearch autoFocus />
+          <GeoLocationSearch />
         </Box>
       </Box>
-    </Layout>
+    </>
   )
 }
 
-export default Landing
+export default LandingPage

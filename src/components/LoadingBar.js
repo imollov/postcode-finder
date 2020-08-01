@@ -1,15 +1,20 @@
 import React, { useContext } from 'react'
 import BarLoader from 'react-spinners/BarLoader'
 import { ThemeContext } from 'styled-components'
+import { Box } from 'grommet'
 
-const Spinner = (props) => {
+const LoadingBar = ({ loading, ...rest }) => {
   const {
     global: {
       colors: { accent },
     },
   } = useContext(ThemeContext)
 
-  return <BarLoader loading color={accent} width="100%" {...props} />
+  return (
+    <Box height="4px">
+      <BarLoader loading={loading} color={accent} width="100%" {...rest} />
+    </Box>
+  )
 }
 
-export default Spinner
+export default LoadingBar
