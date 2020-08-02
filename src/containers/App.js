@@ -6,8 +6,8 @@ import AppLoading from './AppLoading'
 import Layout from '../components/Layout'
 import Splash from '../components/Splash'
 
-const LandingPage = lazy(() => import('./LandingPage'))
-const ResultPage = lazy(() => import('./ResultPage'))
+const Landing = lazy(() => import('../components/Landing'))
+const Result = lazy(() => import('./Result'))
 
 function App() {
   const redirectTo = useSelector((s) => s.redirectTo)
@@ -20,10 +20,10 @@ function App() {
           <AppLoading />
           <Switch>
             <Route path="/" exact>
-              <LandingPage />
+              <Landing />
             </Route>
             <Route path="/:placeId">
-              <ResultPage />
+              <Result />
             </Route>
           </Switch>
         </Layout>
