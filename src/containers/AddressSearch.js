@@ -3,22 +3,22 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import AddressInput from '../components/AddressInput'
 import debounce from '../utils/debounce'
-import { getPlaces, selectPlace } from '../actions'
+import { search, selectResult } from '../actions'
 
 function AddressSearch(props) {
-  const suggestions = useSelector((s) => s.places.map((p) => p.address))
+  const suggestions = useSelector((s) => s.results.map((r) => r.address))
   const selectedAddress = useSelector(
-    (s) => s.selectedPlace && s.selectedPlace.address,
+    (s) => s.selectedResult && s.selectedResult.address,
   )
   const error = useSelector((s) => s.error)
 
   const dispatch = useDispatch()
 
   const handleInputChange = (address) =>
-    address.length > 5 && debounce(() => dispatch(getPlaces({ address })), 250)
+    address.length > 5 && debounce(() => dispatch(search({ address })), 250)
 
   const handleSuggestionSelect = ({ suggestion }) =>
-    dispatch(selectPlace(suggestion))
+    dispatch(selectResult(suggestion))
 
   return (
     <AddressInput

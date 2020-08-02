@@ -22,7 +22,7 @@ function App() {
             <Route path="/" exact>
               <Landing />
             </Route>
-            <Route path="/:placeId">
+            <Route path="/:resultId">
               <Result />
             </Route>
           </Switch>

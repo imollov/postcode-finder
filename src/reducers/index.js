@@ -2,8 +2,8 @@ import { combineReducers } from 'redux'
 import {
   SET_LOADING,
   SET_ERROR,
-  SELECT_PLACE,
-  RECEIVE_PLACES,
+  SELECT_RESULT,
+  RECEIVE_RESULTS,
 } from '../actions'
 
 function loading(state = false, action) {
@@ -12,7 +12,7 @@ function loading(state = false, action) {
       return action.loading
 
     case SET_ERROR:
-    case RECEIVE_PLACES:
+    case RECEIVE_RESULTS:
       return false
 
     default:
@@ -32,20 +32,20 @@ function error(state = null, action) {
 
 function redirectTo(state = null, action) {
   switch (action.type) {
-    case SELECT_PLACE:
-      return `/${action.place.id}`
+    case SELECT_RESULT:
+      return `/${action.result.id}`
 
     default:
       return state
   }
 }
 
-function places(state = [], action) {
+function results(state = [], action) {
   switch (action.type) {
-    case RECEIVE_PLACES:
+    case RECEIVE_RESULTS:
       return action.items
 
-    case SELECT_PLACE:
+    case SELECT_RESULT:
       return []
 
     default:
@@ -53,10 +53,10 @@ function places(state = [], action) {
   }
 }
 
-function selectedPlace(state = null, action) {
+function selectedResult(state = null, action) {
   switch (action.type) {
-    case SELECT_PLACE:
-      return action.place
+    case SELECT_RESULT:
+      return action.result
 
     default:
       return state
@@ -67,6 +67,6 @@ export default combineReducers({
   loading,
   error,
   redirectTo,
-  places,
-  selectedPlace,
+  results,
+  selectedResult,
 })

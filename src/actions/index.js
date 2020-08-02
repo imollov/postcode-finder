@@ -2,8 +2,8 @@ import axios from 'axios'
 
 export const SET_LOADING = 'SET_LOADING'
 export const SET_ERROR = 'SET_ERROR'
-export const SELECT_PLACE = 'SELECT_PLACE'
-export const RECEIVE_PLACES = 'RECEIVE_PLACES'
+export const SELECT_RESULT = 'SELECT_RESULT'
+export const RECEIVE_RESULTS = 'RECEIVE_RESULTS'
 
 export function setLoading(bool) {
   return {
@@ -19,18 +19,18 @@ export function setError(message) {
   }
 }
 
-export function selectPlace(address) {
+export function selectResult(address) {
   return async (dispatch, getState) => {
     dispatch({
-      type: SELECT_PLACE,
-      place: getState().places.find((p) => p.address === address),
+      type: SELECT_RESULT,
+      result: getState().results.find((r) => r.address === address),
     })
   }
 }
 
-export function receivePlaces(data) {
+export function receiveResults(data) {
   return {
-    type: RECEIVE_PLACES,
+    type: RECEIVE_RESULTS,
     items: data.results
       .filter((r) =>
         r.address_components.some((a) => a.types.includes('postal_code')),
@@ -46,7 +46,7 @@ export function receivePlaces(data) {
   }
 }
 
-export function getPlaces(args) {
+export function search(params) {
   return async (dispatch) => {
     dispatch(setLoading(true))
     try {
@@ -54,23 +54,22 @@ export function getPlaces(args) {
         'https://maps.googleapis.com/maps/api/geocode/json',
         {
           params: {
-            ...args,
+            ...params,
             key: process.env.REACT_APP_API_KEY,
           },
         },
       )
-      dispatch(receivePlaces(data))
+      dispatch(receiveResults(data))
     } catch (e) {
       dispatch(setError('Something went wrong'))
     }
   }
 }
 
-export function getPlacesAndSelectFirst(args) {
+export function searchAndSelectFirst(params) {
   return async (dispatch, getState) => {
-    dispatch(getPlaces(args)).then(() => {
-      const topResult = getState().places.find((p) => p)
-      return dispatch(selectPlace(topResult.address))
-    })
+    await dispatch(search(params))
+    const firstResult = getState().results.find((r) => r)
+    return dispatch(selectResult(firstResult.address))
   }
 }

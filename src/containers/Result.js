@@ -4,27 +4,27 @@ import { useParams } from 'react-router-dom'
 
 import Header from '../components/Header'
 import ResultMap from '../components/ResultMap'
-import { getPlacesAndSelectFirst } from '../actions'
+import { searchAndSelectFirst } from '../actions'
 
 const apiKey = process.env.REACT_APP_API_KEY
 
 const Result = () => {
-  const { placeId } = useParams()
-  const selectedPlace = useSelector((s) => s.selectedPlace)
+  const { resultId } = useParams()
+  const selectedResult = useSelector((s) => s.selectedResult)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (!selectedPlace) {
-      dispatch(getPlacesAndSelectFirst({ place_id: placeId }))
+    if (!selectedResult) {
+      dispatch(searchAndSelectFirst({ place_id: resultId }))
     }
-  }, [placeId, selectedPlace, dispatch])
+  }, [resultId, selectedResult, dispatch])
 
-  if (!selectedPlace) return null
+  if (!selectedResult) return null
 
   const {
     location: { lat, lng },
     postalCode,
-  } = selectedPlace
+  } = selectedResult
 
   return (
     <>

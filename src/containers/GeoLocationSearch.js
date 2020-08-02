@@ -4,7 +4,7 @@ import { geolocated } from 'react-geolocated'
 
 import LocateButton from '../components/LocateButton'
 import geoLocationErrorMessage from '../utils/geoLocationErrorMessage'
-import { getPlacesAndSelectFirst, setLoading, setError } from '../actions'
+import { searchAndSelectFirst, setLoading, setError } from '../actions'
 
 const GeoLocatedButton = geolocated({
   positionOptions: {
@@ -20,8 +20,7 @@ const GeoLocationSearch = (props) => {
   useEffect(() => {
     geoLocatedButtonRef.current.onPositionSuccess = ({
       coords: { latitude, longitude },
-    }) =>
-      dispatch(getPlacesAndSelectFirst({ latlng: `${latitude},${longitude}` }))
+    }) => dispatch(searchAndSelectFirst({ latlng: `${latitude},${longitude}` }))
 
     geoLocatedButtonRef.current.onPositionError = ({ code }) =>
       dispatch(setError(geoLocationErrorMessage(code)))
