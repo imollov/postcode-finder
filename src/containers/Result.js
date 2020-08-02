@@ -19,6 +19,12 @@ const Result = () => {
     }
   }, [resultId, selectedResult, dispatch])
 
+  useEffect(() => {
+    if (selectedResult) {
+      document.title = selectedResult.address
+    }
+  }, [selectedResult])
+
   if (!selectedResult) return null
 
   const {
