@@ -36,6 +36,7 @@ export function receivePlaces(data) {
         r.address_components.some((a) => a.types.includes('postal_code')),
       )
       .map((r) => ({
+        id: r.place_id,
         address: r.formatted_address,
         location: r.geometry.location,
         postalCode: r.address_components.find((a) =>

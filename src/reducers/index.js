@@ -33,7 +33,7 @@ function error(state = null, action) {
 function redirectTo(state = null, action) {
   switch (action.type) {
     case SELECT_PLACE:
-      return '/result'
+      return `/${action.place.id}`
 
     default:
       return state
