@@ -4,21 +4,21 @@ import styled from 'styled-components'
 import { FormField, TextInput } from 'grommet'
 import { FormSearch } from 'grommet-icons'
 
-const AddressInput = ({
+function AddressInput({
   address,
   suggestions,
   error,
   onChange,
   onSelect,
   ...rest
-}) => {
+}) {
   const [value, setValue] = useState('')
 
   useEffect(() => {
     setValue(address)
   }, [address])
 
-  const handleChange = (e) => {
+  function handleChange(e) {
     const { value } = e.target
     setValue(value)
     onChange(value)

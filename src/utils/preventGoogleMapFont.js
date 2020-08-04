@@ -1,4 +1,4 @@
-const preventGoogleMapFont = () => {
+function preventGoogleMapFont() {
   const head = document.getElementsByTagName('head')[0]
   const insertBefore = head.insertBefore
 

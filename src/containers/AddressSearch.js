@@ -14,11 +14,13 @@ function AddressSearch(props) {
 
   const dispatch = useDispatch()
 
-  const handleInputChange = (address) =>
-    address.length > 5 && debounce(() => dispatch(search({ address })), 250)
+  function handleInputChange(address) {
+    if (address.length > 5) debounce(() => dispatch(search({ address })), 250)
+  }
 
-  const handleSuggestionSelect = ({ suggestion }) =>
+  function handleSuggestionSelect({ suggestion }) {
     dispatch(selectResult(suggestion))
+  }
 
   return (
     <AddressInput

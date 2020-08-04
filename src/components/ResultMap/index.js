@@ -8,7 +8,7 @@ import MarkerContent from './MarkerContent'
 import GlobalStyle from './GlobalStyle'
 import preventGoogleMapFont from '../../utils/preventGoogleMapFont'
 
-const Map = ({ lat, lng, postalCode, googleMapsKey, ...rest }) => {
+function Map({ lat, lng, postalCode, googleMapsKey, ...rest }) {
   useEffect(() => {
     preventGoogleMapFont()
   }, [])

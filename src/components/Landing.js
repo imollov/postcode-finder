@@ -5,7 +5,7 @@ import Logo from './Logo'
 import AddressSearch from '../containers/AddressSearch'
 import GeoLocationSearch from '../containers/GeoLocationSearch'
 
-const Landing = () => {
+function Landing() {
   const size = useContext(ResponsiveContext)
   const isSmall = size === 'small'
 
