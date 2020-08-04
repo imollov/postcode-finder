@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import { Box, ResponsiveContext } from 'grommet'
 
-import Logo from '../../../components/Logo'
-import AddressSearch from '../../../components/AddressSearch'
-import LocationSearch from '../../../components/LocationSearch'
+import Logo from './Logo'
+import AddressSearch from '../containers/AddressSearch'
+import GeoLocationSearch from '../containers/GeoLocationSearch'
 
-const Content = () => {
+const Landing = () => {
   const size = useContext(ResponsiveContext)
   const isSmall = size === 'small'
 
@@ -21,10 +21,10 @@ const Content = () => {
         }}
       >
         <AddressSearch autoFocus />
-        <LocationSearch />
+        <GeoLocationSearch />
       </Box>
     </Box>
   )
 }
 
-export default Content
+export default Landing

@@ -1,5 +1,4 @@
 import React from 'react'
-import { geolocated } from 'react-geolocated'
 import { Button } from 'grommet'
 import { Waypoint } from 'grommet-icons'
 
@@ -13,9 +12,4 @@ const LocateButton = ({ onClick, isGeolocationAvailable, ...rest }) => (
   />
 )
 
-export default geolocated({
-  positionOptions: {
-    enableHighAccuracy: false,
-  },
-  suppressLocationOnMount: true,
-})(LocateButton)
+export default LocateButton
