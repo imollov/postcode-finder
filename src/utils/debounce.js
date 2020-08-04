@@ -1,6 +1,6 @@
 let timeout
 
-const debounce = (func, delay) => {
+function debounce(func, delay) {
   clearTimeout(timeout)
   timeout = setTimeout(() => {
     func()

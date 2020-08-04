@@ -5,7 +5,7 @@ import Logo from './Logo'
 import AddressSearch from '../containers/AddressSearch'
 import GeoLocationSearch from '../containers/GeoLocationSearch'
 
-const Header = (props) => {
+function Header(props) {
   const size = useContext(ResponsiveContext)
   const isSmall = size === 'small'
 

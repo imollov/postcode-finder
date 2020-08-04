@@ -1,6 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 
+function MarkerBox({ ...rest }) {
+  return (
+    <Container>
+      <InnerBox {...rest} />
+      <Triangle />
+    </Container>
+  )
+}
+
 const Container = styled.div`
   min-width: 200px;
   min-height: 230px;
@@ -27,12 +36,5 @@ const Triangle = styled.div`
   border-right: 20px solid transparent;
   border-top: 20px solid ${(props) => props.theme.global.colors.accent};
 `
-
-const MarkerBox = ({ ...rest }) => (
-  <Container>
-    <InnerBox {...rest} />
-    <Triangle />
-  </Container>
-)
 
 export default MarkerBox

@@ -8,7 +8,7 @@ import { searchAndSelectFirst } from '../actions'
 
 const apiKey = process.env.REACT_APP_API_KEY
 
-const Result = () => {
+function Result() {
   const { resultId } = useParams()
   const selectedResult = useSelector((s) => s.selectedResult)
   const dispatch = useDispatch()

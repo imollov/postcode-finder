@@ -4,7 +4,7 @@ import BarLoader from 'react-spinners/BarLoader'
 import { ThemeContext } from 'styled-components'
 import { Box } from 'grommet'
 
-const LoadingBar = ({ loading = false, ...rest }) => {
+function LoadingBar({ loading = false, ...rest }) {
   const {
     global: {
       colors: { accent },

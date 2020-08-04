@@ -6,14 +6,7 @@ import LocateButton from '../components/LocateButton'
 import geoLocationErrorMessage from '../utils/geoLocationErrorMessage'
 import { searchAndSelectFirst, setLoading, setError } from '../actions'
 
-const GeoLocatedButton = geolocated({
-  positionOptions: {
-    enableHighAccuracy: false,
-  },
-  suppressLocationOnMount: true,
-})(LocateButton)
-
-const GeoLocationSearch = (props) => {
+function GeoLocationSearch(props) {
   const dispatch = useDispatch()
   const geoLocatedButtonRef = React.createRef()
 
@@ -26,7 +19,7 @@ const GeoLocationSearch = (props) => {
       dispatch(setError(geoLocationErrorMessage(code)))
   }, [geoLocatedButtonRef, dispatch])
 
-  const handleClick = () => {
+  function handleClick() {
     dispatch(setLoading(true))
     geoLocatedButtonRef.current.getLocation()
   }
@@ -39,5 +32,12 @@ const GeoLocationSearch = (props) => {
     />
   )
 }
+
+const GeoLocatedButton = geolocated({
+  positionOptions: {
+    enableHighAccuracy: false,
+  },
+  suppressLocationOnMount: true,
+})(LocateButton)
 
 export default GeoLocationSearch
