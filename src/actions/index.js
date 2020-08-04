@@ -2,6 +2,7 @@ import axios from 'axios'
 
 export const SET_LOADING = 'SET_LOADING'
 export const SET_ERROR = 'SET_ERROR'
+export const SET_REDIRECT = 'SET_REDIRECT'
 export const SELECT_RESULT = 'SELECT_RESULT'
 export const RECEIVE_RESULTS = 'RECEIVE_RESULTS'
 
@@ -19,12 +20,26 @@ export function setError(message) {
   }
 }
 
+export function setRedirect(path) {
+  return {
+    type: SET_REDIRECT,
+    path,
+  }
+}
+
 export function selectResult(address) {
   return async (dispatch, getState) => {
     dispatch({
       type: SELECT_RESULT,
       result: getState().results.find((r) => r.address === address),
     })
+  }
+}
+
+export function noResults() {
+  return (dispatch) => {
+    dispatch(setRedirect('/'))
+    dispatch(setError('No results found'))
   }
 }
 
@@ -69,7 +84,9 @@ export function search(params) {
 export function searchAndSelectFirst(params) {
   return async (dispatch, getState) => {
     await dispatch(search(params))
-    const firstResult = getState().results.find((r) => r)
-    return dispatch(selectResult(firstResult.address))
+    const result = getState().results.find((r) => r)
+    return result
+      ? dispatch(selectResult(result.address))
+      : dispatch(noResults())
   }
 }

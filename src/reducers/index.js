@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import {
   SET_LOADING,
   SET_ERROR,
+  SET_REDIRECT,
   SELECT_RESULT,
   RECEIVE_RESULTS,
 } from '../actions'
@@ -32,6 +33,9 @@ function error(state = null, action) {
 
 function redirectTo(state = null, action) {
   switch (action.type) {
+    case SET_REDIRECT:
+      return action.path
+
     case SELECT_RESULT:
       return `/${action.result.id}`
 
