@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
 import GoogleMapReact from 'google-map-react'
 import { Box } from 'grommet'
 
@@ -30,6 +31,15 @@ const Map = ({ lat, lng, postalCode, googleMapsKey, ...rest }) => {
       <GlobalStyle />
     </Box>
   )
+}
+
+const requiredNumber = PropTypes.number.isRequired
+const requiredString = PropTypes.string.isRequired
+Map.propTypes = {
+  lat: requiredNumber,
+  lng: requiredNumber,
+  postalCode: requiredString,
+  googleMapsKey: requiredString,
 }
 
 export default Map

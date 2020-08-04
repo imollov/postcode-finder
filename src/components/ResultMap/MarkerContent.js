@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Box, Heading, Text } from 'grommet'
 
 const MarkerContent = ({ postalCode }) => (
@@ -11,5 +12,9 @@ const MarkerContent = ({ postalCode }) => (
     </Heading>
   </Box>
 )
+
+MarkerContent.propTypes = {
+  postalCode: PropTypes.string.isRequired,
+}
 
 export default MarkerContent
