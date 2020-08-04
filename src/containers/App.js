@@ -5,12 +5,13 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import AppLoading from './AppLoading'
 import Layout from '../components/Layout'
 import Splash from '../components/Splash'
+import { getRedirectTo } from '../selectors'
 
 const Landing = lazy(() => import('../components/Landing'))
 const Result = lazy(() => import('./Result'))
 
 function App() {
-  const redirectTo = useSelector((s) => s.redirectTo)
+  const redirectTo = useSelector(getRedirectTo)
 
   return (
     <BrowserRouter>

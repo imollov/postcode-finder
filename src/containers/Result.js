@@ -5,12 +5,13 @@ import { useParams } from 'react-router-dom'
 import Header from '../components/Header'
 import ResultMap from '../components/ResultMap'
 import { searchAndSelectFirst } from '../actions'
+import { getSelectedResult } from '../selectors'
 
 const apiKey = process.env.REACT_APP_API_KEY
 
 function Result() {
   const { resultId } = useParams()
-  const selectedResult = useSelector((s) => s.selectedResult)
+  const selectedResult = useSelector(getSelectedResult)
   const dispatch = useDispatch()
 
   useEffect(() => {
