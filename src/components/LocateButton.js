@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Button } from 'grommet'
 import { Waypoint } from 'grommet-icons'
 
@@ -11,5 +12,10 @@ const LocateButton = ({ onClick, isGeolocationAvailable, ...rest }) => (
     {...rest}
   />
 )
+
+LocateButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  isGeolocationAvailable: PropTypes.bool.isRequired,
+}
 
 export default LocateButton

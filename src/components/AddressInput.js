@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { FormField, TextInput } from 'grommet'
 import { FormSearch } from 'grommet-icons'
@@ -42,5 +43,13 @@ const AddressInput = ({
 const Field = styled(FormField)`
   width: 100%;
 `
+
+AddressInput.propTypes = {
+  address: PropTypes.string,
+  suggestions: PropTypes.arrayOf(PropTypes.string),
+  error: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired,
+}
 
 export default AddressInput

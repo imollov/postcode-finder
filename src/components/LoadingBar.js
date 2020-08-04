@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
 import BarLoader from 'react-spinners/BarLoader'
 import { ThemeContext } from 'styled-components'
 import { Box } from 'grommet'
 
-const LoadingBar = ({ loading, ...rest }) => {
+const LoadingBar = ({ loading = false, ...rest }) => {
   const {
     global: {
       colors: { accent },
@@ -15,6 +16,10 @@ const LoadingBar = ({ loading, ...rest }) => {
       <BarLoader loading={loading} color={accent} width="100%" {...rest} />
     </Box>
   )
+}
+
+LoadingBar.propTypes = {
+  loading: PropTypes.bool,
 }
 
 export default LoadingBar
