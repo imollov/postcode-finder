@@ -17,7 +17,7 @@ function Map({ lat, lng, postalCode, googleMapsKey, ...rest }) {
     <Box fill {...rest}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: googleMapsKey }}
-        center={{ lat: lat + 0.0015, lng }}
+        center={centeredMarker(lat, lng)}
         defaultZoom={16}
         options={() => ({
           disableDefaultUI: true,
@@ -31,6 +31,10 @@ function Map({ lat, lng, postalCode, googleMapsKey, ...rest }) {
       <GlobalStyle />
     </Box>
   )
+}
+
+function centeredMarker(lat, lng) {
+  return { lat: lat + 0.0015, lng }
 }
 
 const requiredNumber = PropTypes.number.isRequired
