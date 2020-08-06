@@ -1,8 +1,8 @@
 import React from 'react'
+import debounce from 'lodash.debounce'
 import { useSelector, useDispatch } from 'react-redux'
 
 import AddressInput from '../components/AddressInput'
-import debounce from '../utils/debounce'
 import { search, selectResult } from '../actions'
 import { getResultsAddresses, getSelectedAddress, getError } from '../selectors'
 
@@ -13,8 +13,13 @@ function AddressSearch(props) {
 
   const dispatch = useDispatch()
 
-  function handleInputChange(address) {
-    if (address.length > 5) debounce(() => dispatch(search({ address })), 250)
+  const debouncedSearch = debounce(
+    (address) => dispatch(search({ address })),
+    300,
+  )
+
+  function handleInputChange(value) {
+    if (value.length > 5) debouncedSearch(value)
   }
 
   function handleSuggestionSelect({ suggestion }) {
