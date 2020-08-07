@@ -18,6 +18,7 @@
     "react-spinners": "^0.8.3",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "source-map-explorer": "^2.4.2",
     "styled-components": "^5.1.0"
   },
   "scripts": {
@@ -26,7 +27,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src",
-    "format": "prettier --write src/**/*"
+    "format": "prettier --write src/**/*",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
     "extends": "react-app"
