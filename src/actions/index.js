@@ -13,6 +13,44 @@ export function searchRequest() {
   }
 }
 
+export function search(params) {
+  return async (dispatch) => {
+    dispatch(searchRequest())
+    try {
+      const { data } = await axios.get(
+        'https://maps.googleapis.com/maps/api/geocode/json',
+        {
+          params: {
+            ...params,
+            key: process.env.REACT_APP_API_KEY,
+          },
+        },
+      )
+      dispatch(searchSuccess(data))
+    } catch (e) {
+      dispatch(searchFailure('Something went wrong'))
+    }
+  }
+}
+
+export function searchSuccess(data) {
+  return {
+    type: SEARCH_SUCCESS,
+    items: data.results
+      .filter((r) =>
+        r.address_components.some((a) => a.types.includes('postal_code')),
+      )
+      .map((r) => ({
+        id: r.place_id,
+        address: r.formatted_address,
+        location: r.geometry.location,
+        postalCode: r.address_components.find((a) =>
+          a.types.includes('postal_code'),
+        )['short_name'],
+      })),
+  }
+}
+
 export function searchFailure(message) {
   return {
     type: SEARCH_FAILURE,
@@ -45,44 +83,6 @@ export function selectResult(address) {
       type: SELECT_RESULT,
       result: getState().results.find((r) => r.address === address),
     })
-  }
-}
-
-export function searchSuccess(data) {
-  return {
-    type: SEARCH_SUCCESS,
-    items: data.results
-      .filter((r) =>
-        r.address_components.some((a) => a.types.includes('postal_code')),
-      )
-      .map((r) => ({
-        id: r.place_id,
-        address: r.formatted_address,
-        location: r.geometry.location,
-        postalCode: r.address_components.find((a) =>
-          a.types.includes('postal_code'),
-        )['short_name'],
-      })),
-  }
-}
-
-export function search(params) {
-  return async (dispatch) => {
-    dispatch(searchRequest())
-    try {
-      const { data } = await axios.get(
-        'https://maps.googleapis.com/maps/api/geocode/json',
-        {
-          params: {
-            ...params,
-            key: process.env.REACT_APP_API_KEY,
-          },
-        },
-      )
-      dispatch(searchSuccess(data))
-    } catch (e) {
-      dispatch(searchFailure('Something went wrong'))
-    }
   }
 }
 
