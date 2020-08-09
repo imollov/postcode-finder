@@ -55,6 +55,7 @@ export function searchFailure(message) {
   return {
     type: SEARCH_FAILURE,
     message,
+    redirectTo: '/',
   }
 }
 
@@ -79,9 +80,11 @@ export function userLocationFailure(message) {
 
 export function selectResult(address) {
   return async (dispatch, getState) => {
+    const result = getState().results.find((r) => r.address === address)
     dispatch({
       type: SELECT_RESULT,
-      result: getState().results.find((r) => r.address === address),
+      result,
+      redirectTo: `/${result.id}`,
     })
   }
 }

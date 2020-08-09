@@ -41,10 +41,8 @@ function error(state = null, action) {
 function redirectTo(state = null, action) {
   switch (action.type) {
     case SELECT_RESULT:
-      return `/${action.result.id}`
-
     case SEARCH_FAILURE:
-      return '/'
+      return action.redirectTo
 
     default:
       return state
