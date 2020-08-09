@@ -1,13 +1,24 @@
 import axios from 'axios'
 
+export const SEARCH_REQUEST = 'SEARCH_REQUEST'
+export const SEARCH_SUCCESS = 'SEARCH_SUCCESS'
+export const SEARCH_FAILURE = 'SEARCH_FAILURE'
 export const USER_LOCATION_REQUEST = 'USER_LOCATION_REQUEST'
 export const USER_LOCATION_FAILUIRE = 'USER_LOCATION_FAILUIRE'
-
-export const SET_LOADING = 'SET_LOADING'
-export const SET_ERROR = 'SET_ERROR'
-export const SET_REDIRECT = 'SET_REDIRECT'
 export const SELECT_RESULT = 'SELECT_RESULT'
-export const RECEIVE_RESULTS = 'RECEIVE_RESULTS'
+
+export function searchRequest() {
+  return {
+    type: SEARCH_REQUEST,
+  }
+}
+
+export function searchFailure(message) {
+  return {
+    type: SEARCH_FAILURE,
+    message,
+  }
+}
 
 export function userLocationRequest() {
   return {
@@ -28,27 +39,6 @@ export function userLocationFailure(message) {
   }
 }
 
-export function setLoading(bool) {
-  return {
-    type: SET_LOADING,
-    loading: bool,
-  }
-}
-
-export function setError(message) {
-  return {
-    type: SET_ERROR,
-    error: message,
-  }
-}
-
-export function setRedirect(path) {
-  return {
-    type: SET_REDIRECT,
-    path,
-  }
-}
-
 export function selectResult(address) {
   return async (dispatch, getState) => {
     dispatch({
@@ -58,16 +48,9 @@ export function selectResult(address) {
   }
 }
 
-export function noResults() {
-  return (dispatch) => {
-    dispatch(setRedirect('/'))
-    dispatch(setError('No results found'))
-  }
-}
-
-export function receiveResults(data) {
+export function searchSuccess(data) {
   return {
-    type: RECEIVE_RESULTS,
+    type: SEARCH_SUCCESS,
     items: data.results
       .filter((r) =>
         r.address_components.some((a) => a.types.includes('postal_code')),
@@ -85,7 +68,7 @@ export function receiveResults(data) {
 
 export function search(params) {
   return async (dispatch) => {
-    dispatch(setLoading(true))
+    dispatch(searchRequest())
     try {
       const { data } = await axios.get(
         'https://maps.googleapis.com/maps/api/geocode/json',
@@ -96,9 +79,9 @@ export function search(params) {
           },
         },
       )
-      dispatch(receiveResults(data))
+      dispatch(searchSuccess(data))
     } catch (e) {
-      dispatch(setError('Something went wrong'))
+      dispatch(searchFailure('Something went wrong'))
     }
   }
 }
@@ -107,8 +90,8 @@ export function searchAndSelectFirst(params) {
   return async (dispatch, getState) => {
     await dispatch(search(params))
     const result = getState().results.find((r) => r)
-    return result
-      ? dispatch(selectResult(result.address))
-      : dispatch(noResults())
+    if (result) {
+      return dispatch(selectResult(result.address))
+    }
   }
 }
