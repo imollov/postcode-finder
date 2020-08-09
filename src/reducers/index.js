@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux'
 import {
+  USER_LOCATION_REQUEST,
+  USER_LOCATION_FAILUIRE,
   SET_LOADING,
   SET_ERROR,
   SET_REDIRECT,
@@ -12,8 +14,12 @@ function loading(state = false, action) {
     case SET_LOADING:
       return action.loading
 
+    case USER_LOCATION_REQUEST:
+      return true
+
     case SET_ERROR:
     case RECEIVE_RESULTS:
+    case USER_LOCATION_FAILUIRE:
       return false
 
     default:
@@ -25,6 +31,9 @@ function error(state = null, action) {
   switch (action.type) {
     case SET_ERROR:
       return action.error
+
+    case USER_LOCATION_FAILUIRE:
+      return action.message
 
     default:
       return state

@@ -1,10 +1,32 @@
 import axios from 'axios'
 
+export const USER_LOCATION_REQUEST = 'USER_LOCATION_REQUEST'
+export const USER_LOCATION_FAILUIRE = 'USER_LOCATION_FAILUIRE'
+
 export const SET_LOADING = 'SET_LOADING'
 export const SET_ERROR = 'SET_ERROR'
 export const SET_REDIRECT = 'SET_REDIRECT'
 export const SELECT_RESULT = 'SELECT_RESULT'
 export const RECEIVE_RESULTS = 'RECEIVE_RESULTS'
+
+export function userLocationRequest() {
+  return {
+    type: USER_LOCATION_REQUEST,
+  }
+}
+
+export function userLocationSuccess({ latitude, longitude }) {
+  return async (dispatch) => {
+    dispatch(searchAndSelectFirst({ latlng: `${latitude},${longitude}` }))
+  }
+}
+
+export function userLocationFailure(message) {
+  return {
+    type: USER_LOCATION_FAILUIRE,
+    message,
+  }
+}
 
 export function setLoading(bool) {
   return {
