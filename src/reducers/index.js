@@ -1,19 +1,22 @@
 import { combineReducers } from 'redux'
 import {
-  SET_LOADING,
-  SET_ERROR,
-  SET_REDIRECT,
+  SEARCH_REQUEST,
+  SEARCH_SUCCESS,
+  SEARCH_FAILURE,
+  USER_LOCATION_REQUEST,
+  USER_LOCATION_FAILUIRE,
   SELECT_RESULT,
-  RECEIVE_RESULTS,
 } from '../actions'
 
 function loading(state = false, action) {
   switch (action.type) {
-    case SET_LOADING:
-      return action.loading
+    case SEARCH_REQUEST:
+    case USER_LOCATION_REQUEST:
+      return true
 
-    case SET_ERROR:
-    case RECEIVE_RESULTS:
+    case SEARCH_SUCCESS:
+    case SEARCH_FAILURE:
+    case USER_LOCATION_FAILUIRE:
       return false
 
     default:
@@ -23,8 +26,12 @@ function loading(state = false, action) {
 
 function error(state = null, action) {
   switch (action.type) {
-    case SET_ERROR:
-      return action.error
+    case SEARCH_FAILURE:
+    case USER_LOCATION_FAILUIRE:
+      return action.message
+
+    case SEARCH_SUCCESS:
+      return null
 
     default:
       return state
@@ -33,11 +40,9 @@ function error(state = null, action) {
 
 function redirectTo(state = null, action) {
   switch (action.type) {
-    case SET_REDIRECT:
-      return action.path
-
     case SELECT_RESULT:
-      return `/${action.result.id}`
+    case SEARCH_FAILURE:
+      return action.redirectTo
 
     default:
       return state
@@ -46,7 +51,7 @@ function redirectTo(state = null, action) {
 
 function results(state = [], action) {
   switch (action.type) {
-    case RECEIVE_RESULTS:
+    case SEARCH_SUCCESS:
       return action.items
 
     case SELECT_RESULT:
