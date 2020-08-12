@@ -1,13 +1,20 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-function MarkerBox({ ...rest }) {
+function MarkerBox(props) {
   return (
     <Container>
-      <InnerBox {...rest} />
+      <InnerBox {...props} />
       <Triangle />
     </Container>
   )
+}
+
+const requiredNumber = PropTypes.number.isRequired
+MarkerBox.propTypes = {
+  lat: requiredNumber,
+  lng: requiredNumber,
 }
 
 const Container = styled.div`
