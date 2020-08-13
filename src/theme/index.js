@@ -6,12 +6,12 @@ const theme = deepMerge(grommet, {
     colors: {
       brand: '#10375c',
       accent: '#f3c623',
-      border: '#999999',
+      neutral: '#999999',
       focus: '#faf4ff',
     },
     control: {
       border: {
-        color: 'border',
+        color: 'neutral',
       },
     },
     focus: {
@@ -19,6 +19,9 @@ const theme = deepMerge(grommet, {
         color: 'focus',
       },
     },
+  },
+  anchor: {
+    color: 'neutral',
   },
 })
 

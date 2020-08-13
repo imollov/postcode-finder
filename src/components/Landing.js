@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
-import { Box, ResponsiveContext } from 'grommet'
+import { Anchor, Box, ResponsiveContext } from 'grommet'
+import { Github } from 'grommet-icons'
 
 import Logo from './Logo'
 import AddressSearch from '../containers/AddressSearch'
@@ -22,6 +23,15 @@ function Landing() {
       >
         <AddressSearch autoFocus />
         <GeoLocationSearch />
+      </Box>
+      <Box pad={{ top: 'large' }}>
+        <Anchor
+          icon={<Github />}
+          label="GitHub"
+          size="small"
+          href="https://github.com/imollov/postcode-finder"
+          target="_blank"
+        />
       </Box>
     </Box>
   )
