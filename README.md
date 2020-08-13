@@ -2,7 +2,7 @@
 
 # postcode-finder
 
-![postcode-finder-sample-result-page](screenshot.png)
+![postcode-finder-sample-result-page](screenshot.jpg)
 
 ## Features
 
