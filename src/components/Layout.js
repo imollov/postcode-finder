@@ -4,7 +4,7 @@ import theme from '../theme'
 
 function Layout(props) {
   return (
-    <Grommet full theme={theme}>
+    <Grommet full css="min-height: 100vh" theme={theme}>
       <Box fill background="brand" {...props} />
     </Grommet>
   )
